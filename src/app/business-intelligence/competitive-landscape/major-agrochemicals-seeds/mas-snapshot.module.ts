@@ -1,0 +1,44 @@
+﻿
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import { MASSnapshotRouting } from './mas-snapshot.routing';
+import { ExportModule } from '../../../widgets/export/export.module';
+import { FilterModule } from '../../../widgets/filters/filter.module';
+import { ActionModule } from '../../../widgets/actions/action.module';
+import { PopoverModule } from 'ng2-popover';
+import { TableModule } from '../../../widgets/datatable/datatable.module';
+import { CompetitorMenuModule } from './competitormenu.module';
+import { MASSnapshotComponent } from './mas-snapshot.component';
+import {LoaderModule} from '../../../loader/loader.module'
+
+
+@NgModule({
+    imports:
+    [
+        HttpModule,
+        FormsModule,
+        CommonModule,
+        ExportModule,
+        FilterModule,
+        ExportModule,
+        ActionModule,
+        PopoverModule,
+        TableModule,
+        CompetitorMenuModule,
+        MASSnapshotRouting,
+        LoaderModule
+    ],
+    declarations:
+    [
+        MASSnapshotComponent
+    ],
+    exports: [
+        MASSnapshotComponent
+    ]
+
+})
+export class MASSnapshotModule { }

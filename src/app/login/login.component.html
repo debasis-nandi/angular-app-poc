@@ -1,0 +1,56 @@
+﻿
+<style type="text/css">
+    body {
+        overflow-y: hidden;
+    }
+    ::-webkit-scrollbar { 
+    display: none; 
+}
+</style>
+<div>
+   
+</div>
+<body>
+    <form>
+        <div>
+            <div class="login ">
+                    <div style="margin-top:150px !important;">
+                        <my-loader [loading]="loading"></my-loader>
+                    </div>
+                <div *ngIf="!isAadAuth"  class="loginWidth col-md-3 col-sm-4 col-xs-12">
+                    <img [src]="logoPath" class="img-responsive text-center marginB25">
+                    <div class="row size14">
+                        <div id="Login">
+                            <section *ngIf="errorMsg" class="col-xs-12" id="loginMsg">
+                                <div class="alert alert-danger fade in marginB0">
+                                    <span>{{errorMsg}}</span>
+                                </div>
+                            </section>
+                            <section class="col-xs-12 paddingBottom10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user size18" aria-hidden="true"></i></span>
+                                    <input id="username" type="email" class="form-control" placeholder="Username" [(ngModel)]="user.username" name="username">
+                                </div>
+                            </section>
+                            <section class="col-xs-12 paddingBottom10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock size18" aria-hidden="true"></i></span>
+                                    <input id="password" type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password">
+                                </div>
+                            </section>
+                            <!--<section class="col-xs-6 paddingBottom20"> <a href="javascript:void(0)" onclick="Forgot()">Forgot Password?</a> </section>-->
+                            <section class="col-xs-12 text-center paddingBottom20">
+                                <!--<a href="#" class="btn" onclick="Submit()">Login</a>-->
+                                <input type="submit" value="Login" (click)="Submit()" class="btn" name="submit" />
+                                <!-- <a href="#" class="button" onclick="loginMe()">Reset</a>-->
+                            </section>
+
+                            
+                        </div>
+                        <section class="col-xs-12 paddingTop20 size12 text-center"><a href="#" target="_blank" class="BlueNavy">© 2017 Syngenta</a> All right reserved. </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

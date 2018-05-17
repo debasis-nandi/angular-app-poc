@@ -1,0 +1,81 @@
+﻿[
+  {
+    "type": "news",
+    "typeName": "News",
+    "count": "3",
+    "data": [
+      {
+        "createdDate": "28 June 17",
+        "title": "US EPA approved Monsanto's new Genetic-Engineering Technology",
+        "content": "US EPA approved the use of DvSnf7 dsRNA, an RNA interference (RNAi) based insecticide technology. Monsanto expects corn seed with RNAi to be on the market by the end of this decade.",
+        "type": "Research and Development",
+        "module": "Competitive Landscape",
+        "region": "Global",
+        "country": "Canada",
+        "uploadedBy": "User 1"
+      },
+      {
+        "createdDate": "28 June 17",
+        "title": "US EPA approved Monsanto's new Genetic-Engineering Technology",
+        "content": "US EPA approved the use of DvSnf7 dsRNA, an RNA interference (RNAi) based insecticide technology. Monsanto expects corn seed with RNAi to be on the market by the end of this decade.",
+        "type": "Research and Development",
+        "module": "Competitive Landscape",
+        "region": "Global",
+        "country": "Canada",
+        "uploadedBy": "User 1"
+      },
+      {
+        "createdDate": "28 June 17",
+        "title": "US EPA approved Monsanto's new Genetic-Engineering Technology",
+        "content": "US EPA approved the use of DvSnf7 dsRNA, an RNA interference (RNAi) based insecticide technology. Monsanto expects corn seed with RNAi to be on the market by the end of this decade.",
+        "type": "Research and Development",
+        "module": "Competitive Landscape",
+        "region": "Global",
+        "country": "Canada",
+        "uploadedBy": "User 1"
+      }
+    ]
+  },
+  {
+    "type": "knowledgeManagement",
+    "typeName": "Knowledge Management",
+    "count": "2",
+    "data": [
+      {
+        "createdDate": "28 June 17",
+        "fileType": "doc",
+        "fileName": "Inflation.doc",
+        "title": "Inflation rate by region (Historical data)",
+        "content": "Inflation rates from 1995 upto present year are available here.",
+        "module": "Competitive Landscape",
+        "region": "Global",
+        "country": "Canada",
+        "uploadedBy": "User 1"
+      },
+      {
+        "createdDate": "28 June 17",
+        "fileType": "doc",
+        "fileName": "Inflation.doc",
+        "title": "Inflation rate by region (Historical data)",
+        "content": "Inflation rates from 1995 upto present year are available here.",
+        "module": "Competitive Landscape",
+        "region": "Global",
+        "country": "Canada",
+        "uploadedBy": "User 1"
+      }
+    ]
+  },
+  {
+    "type": "macroeconomics",
+    "typeName": "Macroeconomics",
+    "count": "2",
+    "data": [
+      {
+        "title": "Global Inflation"
+      },
+      {
+        "title": "Inflation (Global vs. Regional)"
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+﻿
+<div class="row">
+    <div class="col-md-12 col-xs-12 padding0">
+
+        <div class="graph-boxes floatNone text-center" *ngIf="chartItems.length == 0">
+            <span class="no-data">No record found</span>
+        </div>
+
+        <div class="white-boxes marginMobT40 min400" *ngIf="chartItems.length > 0">
+            <p class="marginB0 paddingT10 paddingB10 borderB">Displaying results {{pager.startIndex + 1}}-{{pager.endIndex + 1}} out of {{pager.totalItems}}</p>
+
+            <div *ngFor="let item of pagedItems; let i = index" class="row paddingT20 paddingB10 borderB">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <i class="size22 fa fa-pie-chart lgrey marginR5"></i>
+                    <!--<a href="JavaScript:Void(0)" class="pull-right"><i class="fa fa-share-alt size24 bgreen"></i></a>-->
+                    <a *ngIf="item.CompetitorName" (click)="onRedirect(item.PageName, item.CompetitorId, item.ChartYear, item.CompetitorName)" href="JavaScript:void(0);" class="blue size15">{{item.ChartName}} - {{item.CompetitorName}} </a>
+                    <a *ngIf="item.CropName" (click)="onRedirect(item.PageName, item.CropId, item.ChartYear, item.CropName)" href="JavaScript:void(0);" class="blue size15">{{item.ChartName}} - {{item.CropName}} </a>
+                    <a *ngIf="!item.CropName && !item.CompetitorName" (click)="onRedirect(item.PageName, 0, item.ChartYear, '')" href="JavaScript:void(0);" class="blue size15">{{item.ChartName}} </a>
+                </div>
+
+            </div>
+            <div class="alignCenter" *ngIf="totalSize > rowPerPage">
+
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1, false)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1, false)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page, false)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1, false)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages, false)">Last</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>

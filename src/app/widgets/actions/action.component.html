@@ -1,0 +1,47 @@
+﻿<div [ngSwitch]="actionObject.actionName|lowercase">
+    <div *ngSwitchCase="'filter'" class="pull-right">
+
+        <!--<div (click)="showFilterPopup()" [ngStyle]="{ 'background-image': 'url(' + actionType.actionUrl + ')', width: '25px', height: '23px'}"></div>-->
+        <a href="javascript:void(0)" class="widget_big" id="pop1" data-toggle="tooltip" title="Filter" onmouseenter="$(this).tooltip('show')">
+            <i [class]="actionObject.iconClass"></i>
+        </a>
+
+    </div>
+    <div *ngSwitchCase="'edit'">
+        <!--<div [ngStyle]="{ 'background-image': 'url(' + actionType.actionUrl + ')', width: '25px', height: '23px'}"></div>-->
+        <!--<div><i class="fa fa-filter dblue1 size24"></i></div>-->
+        <span [class]="actionObject.iconClass"></span>
+    </div>
+    <div *ngSwitchCase="'favourite'" class="pull-right">
+        <a href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Favourite" onmouseenter="$(this).tooltip('show')" (click)="onFavouriteClick()">
+            <i [class]="actionObject.iconClass"></i>
+        </a>
+        
+    </div>
+    <div *ngSwitchCase="'arrowdown'">
+        <i [class]="actionObject.iconClass"></i>
+    </div>
+
+    <div *ngSwitchCase="'arrowup'">
+        <i [class]="actionObject.iconClass"></i>
+    </div>
+
+    <div *ngSwitchCase="'content sharing'" class="pull-right">
+        <a href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Content Sharing" onmouseenter="$(this).tooltip('show')">
+            <i [class]="actionObject.iconClass"></i>
+        </a>
+    </div>
+
+    <div *ngSwitchCase="'export'" class="pull-right">
+        <a href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Export" onmouseenter="$(this).tooltip('show')">
+            <i [class]="actionObject.iconClass"></i>
+        </a>
+    </div>
+
+    <div *ngSwitchCase="'cpr link'" class="pull-right">
+        <a href="javascript:void(0)" [class]="actionObject.iconClass" data-toggle="tooltip" title="CPR Link" onmouseenter="$(this).tooltip('show')" (click)="CprSubmit()">
+          CPR
+        </a>
+    </div>
+   </div>
+

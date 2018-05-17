@@ -1,0 +1,126 @@
+﻿<div><my-loader [loading]="loading"></my-loader></div>
+<div class="container">
+    <section class="paddingMob10 paddingB0">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-10 col-sm-10 col-xs-12 padding0">Upload Data </h1>
+                <div class="col-md-2 col-sm-2 col-xs-12 text-right paddingT20 paddingMob0">
+                    <a href="#0" data-toggle="modal" data-target="#templateModal" class="pull-right size14 marginT10">
+                        <i class="fa fa-arrow-circle-o-down marginR5 size18"></i>Download Template
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="content" class="paddingMob10 padding0">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding0">
+                        <div class="blue-boxes animated fadeInDown innerTop borderT2blue">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="Module">Module<span class="mandatory"> *</span> </label>
+                                            <select class="form-control Module" [(ngModel)]="model.moduleId">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.uploadDataModuleList" [value]="item.id">{{item.name}}</option>
+                                            </select>
+                                            <span class="red">{{moduleMsg}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 hidden-xs ">&nbsp;</div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="usr">Upload<span class="mandatory"> *</span> </label>
+                                            <p-fileUpload (onSelect)="onSelect($event)"
+                                                          chooseLabel="Browse"
+                                                          multiple="multiple"
+                                                          showUploadButton="false"
+                                                          showCancelButton="false"
+                                                          (onClear)="onClear($event)">
+                                                <ng-template pTemplate="content">
+                                                    <div *ngIf="uploadedFiles">
+                                                        <div class="ui-fileupload-row" *ngFor="let file of uploadedFiles; let i = index;">
+                                                            <div>{{file.name}} - {{ formatSize(file.size) }} </div>
+                                                            <div><button type="button" icon="fa-close" pButton (click)="onRemove($event,i)"></button></div>
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                            </p-fileUpload>
+                                            <span class="red">{{uploadFileMsg}}</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group marginT35">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" [(ngModel)]="isUpdate">
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> Update
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row paddingT15">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 padding0">
+                                            <!--<a href="javascript:void(0)" class="btn marginL10" id="reset_btn" (click)="onCancel()"> Cancel</a>-->
+                                            <a href="javascript:void(0)" class="btn" id="submit_btn" (click)="onUpload()"> Upload</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row paddingT15" *ngIf="successMsg">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 padding0">
+                                            <span [ngClass]="successMsgClass">{{successMsg}}</span>
+                                        </div>
+                                    </div>
+                                    <!--Donwload error file-->
+                                    <div class="col-md-3 col-sm-3 col-xs-12" *ngIf="UploadStatus==false">
+                                        <div class="marginT35">
+                                            <a href="#0" data-toggle="modal" (click)="onErroFileDownload('erroFile.txt')">
+                                                <i class="fa fa-arrow-circle-o-down marginR5 size18"></i>Error file
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    <div id="templateModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title blue">Download Templates</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover comp-table">
+                        <thead>
+                            <tr>
+                                <th>Template</th>
+                                <th class="text-center">Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of model.uploadDataModuleList">
+                                <td>{{item.name}}</td>
+                                <td class="text-center"><a href="javascript:void(0)" *ngIf="item.templateFileName" (click)="onFileDownload(item.templateFileName)"><i class="fa fa-arrow-circle-o-down size22"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

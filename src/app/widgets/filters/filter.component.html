@@ -1,0 +1,383 @@
+﻿<div class="row cropWidth">
+    <div *ngFor="let filterObject of filtersList">
+
+        <div [ngSwitch]="filterObject.filterType|lowercase">
+            <div *ngSwitchCase="'dropdownparent'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div class="form-group padding0">
+                        <select (change)="onParentDropdownChange($event.target.value,filterObject)" class="form-control">
+                            <option *ngFor="let dd of filterObject.filterData" value={{dd.labelId}} [selected]="filterObject.selectedData==dd.labelId">
+                                {{dd.label}}
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <div #childdropdown>
+                    <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10" *ngIf="childDropdownObject">
+                        <div class="dgrey bold marginB5">{{childDropdownObject[0]?.filterName}}</div>
+                        <div class="form-group padding0">
+                            <select (change)="onChildChange($event.target.value,childDropdownObject[0])" class="form-control">
+                                <option *ngFor="let dd of childDropdownObject[0]?.filterData" value={{dd.labelId}} [selected]="childDropdownObject[0]?.selectedData==dd.labelId">
+                                    {{dd.label}}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div #dropdown *ngSwitchCase="'dropdown'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div *ngIf="(filterObject?.filterName|lowercase) !='source'" class="form-group padding0">
+                        <select (change)="onDropdownChange($event.target.value,filterObject)" class="form-control">
+                            <option *ngFor="let dd of filterObject.filterData" value={{dd.labelId}} [selected]="(filterObject.filterName=='Crop' && cropId !=0)? cropId==dd.labelId : filterObject.selectedData==dd.labelId">
+                                {{dd.label}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="(filterObject?.filterName|lowercase) =='source' && filtersRelationList.length>0 " class="form-group padding0">
+                        <select (change)="onSourceDropdownChange($event.target.value)" class="form-control">
+                            <option *ngIf='sourceData?.length==0' value="0">--Select--</option>
+                            <option *ngFor="let dd of sourceData" value={{dd.sourceId}} [selected]="(filterObject.filterName=='Crop' && cropId !=0)? cropId==dd.labelId : filterObject.selectedData==dd.labelId">
+                                {{dd.sourceName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="(filterObject?.filterName|lowercase) =='source' && filtersRelationList.length<=0" class="form-group padding0">
+                        <select (change)="onDropdownChange($event.target.value,filterObject)" class="form-control">
+                            <option *ngFor="let dd of filterObject.filterData" value={{dd.labelId}} [selected]="(filterObject.filterName=='Crop' && cropId !=0)? cropId==dd.labelId : filterObject.selectedData==dd.labelId">
+                                {{dd.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-sm-3 col-xs-3" #monthlyDropdowns *ngSwitchCase="'monthlydropdowns'">
+                <div *ngIf="monthlyTypeHtml=='default'">
+                    <div *ngFor="let dropdown of filterObject.filterData; let i = index">
+                        <div *ngIf="i==0" class="dgrey bold marginB5">From</div>
+                        <div *ngIf="i==2" class="col-md-12 padding0 dgrey bold marginB5">To</div>
+
+                        <div class="monthlydropdowns col-md-6 paddingL0">
+                            <div class="form-group ">
+                                <select [(ngModel)]="monthly[i]" (change)="onMonthlyDropdownChange(monthly[i],dropdown.filterName,i,filterObject?.filterData[1].filterName)" class="form-control">
+                                    <option *ngFor="let dd of dropdown.filterData" value={{dd.labelId}}>
+
+                                        {{dd.label}}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div #monthlyDropdowns *ngSwitchCase="'monthlydropdowns'">
+                <div *ngIf="monthlyTypeHtml=='price'">
+                    <div class="col-md-12 paddingL0">
+                        <div class="col-md-3 col-sm-3 col-xs-3 dgrey bold marginB5 paddingLeft5">From</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 dgrey bold marginB5">To</div>
+                    </div>
+                    <div class="col-md-6 paddingL0">
+                        <div class="col-md-3 col-sm-3 col-xs-3" *ngFor="let dropdown of filterObject.filterData; let i = index">
+                            <div class="form-group monthlydropdowns paddingL0" *ngIf="i==0 || i==1">
+                                <select [(ngModel)]="monthly[i]" (change)="onMonthlyDropdownChange(monthly[i],dropdown.filterName,i,filterObject?.filterData[1].filterName)" class="form-control">
+                                    <option *ngFor="let dd of dropdown.filterData" value={{dd.labelId}}>
+                                        {{dd.label}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group monthlydropdowns paddingL0" *ngIf="i==2 || i==3">
+                                <select [(ngModel)]="monthly[i]" (change)="onMonthlyDropdownChange(monthly[i],dropdown.filterName,i,filterObject?.filterData[1].filterName)" class="form-control">
+                                    <option *ngFor="let dd of dropdown.filterData" value={{dd.labelId}}>
+                                        {{dd.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngSwitchCase="'radiobutton'">
+                <ng-content></ng-content>
+                <div #radio class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div class="radio radio-info radio-circle">
+                        <div class="col-lg-6 col-sm-6 col-xs-6 padding0" *ngFor="let entry of filterObject.filterData; let i = index">
+                            <div class="radio">
+                                <label>
+                                    <!--<input type="radio" name="radiogroup" [value]="entry.label" (change)="onChangeRadioButton($event.target.value,filterObject.filterName)">{{ entry.label }}-->
+                                    <input type="radio" name="radiogroup+{{widgetId}}" [value]="entry.label" (change)="onChangeRadioButton($event.target.value,filterObject.filterName)" [checked]="entry.label==filterObject.selectedData?true:false">
+                                    <span class="cr"><i class="cr-icon fa fa-circle"></i></span>{{ entry.label }}
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="'radiobuttonstatic'">
+                <ng-content></ng-content>
+                <div #radio class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 paddingR0 marginB10">
+                    <div class="col-md-12 dgrey bold marginB5 padding0">{{filterObject.filterName}}</div>
+                    <div class="radio radio-info radio-circle">
+                        <div class="col-lg-5 col-sm-5 col-xs-2 padding0" *ngFor="let entry of filterObject.filterData; let i = index">
+                            <div class="radio">
+                                <label>
+                                    <!--<input type="radio" name="radiogroup" [value]="entry.label" (change)="onChangeRadioButton($event.target.value,filterObject.filterName)">{{ entry.label }}-->
+                                    <input type="radio" name="radiogroup+{{widgetId}}" [value]="entry.label" [(ngModel)]="radioValue" (change)="onChangeNewRadioButton(radioValue,filterObject.filterName)">
+                                    <span class="cr"><i class="cr-icon fa fa-circle"></i></span>{{ entry.label }}
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 paddingLeft5 marginB10" #sliderYear *ngSwitchCase="'slidery'">
+                <div *ngIf="cascadeDependency == 'default'">
+                    <div class="dgrey marginB5">
+                        <b>{{'Yearly '+filterObject.filterName}}</b>  <span class="lgrey size12">{{'('+ filterObject.filterData[0].defaultValue[0]+'-'+ filterObject.filterData[0].defaultValue[1]+')'}}</span>
+                    </div>
+                    <div class="paddingL10 marginB25">
+                        <nouislider [connect]="true" [behaviour]= "'drag'" [min]="filterObject.filterData[0]['minValue']" [max]="filterObject.filterData[0]['maxValue']" [step]="1" [(ngModel)]="filterObject.filterData[0]['defaultValue']" (ngModelChange)="onChange($event,filterObject.filterName+'Year')" [limit]="6" [tooltips]="tooltipYear"></nouislider>
+                    </div>
+                </div>
+                <div *ngIf="cascadeDependency == 'crop' || cascadeDependency == 'region' || cascadeDependency == 'regionminussource'">
+                    <div class="dgrey marginB5">
+                        <b>{{'Yearly '+filterObject.filterName}}</b>  <span class="lgrey size12">{{'('+ sliderSelected[0]+'-'+ sliderSelected[1]+')'}}</span>
+                    </div>
+                    <div class="paddingL10 marginB25">
+                        <nouislider [connect]="true" [behaviour]= "'drag'" [min]="sliderMinValue" [max]="sliderMaxValue" [step]="1" [(ngModel)]="sliderSelected" (ngModelChange)="onChange($event,filterObject.filterName+'Year')" [limit]="6" [tooltips]="tooltipYear"></nouislider>
+                    </div>
+                </div>
+                <!--<div *ngIf="cascadeDependency == 'cropComparison'">
+                    <div class="dgrey marginB5">
+                        <b>{{'Yearly '+filterObject.filterName}}</b>  <span class="lgrey size12">{{'('+ filterObject.filterData[0].defaultValue[0]+'-'+ filterObject.filterData[0].defaultValue[1]+')'}}</span>
+                    </div>
+                    <div class="paddingL10 marginB25">
+                        <nouislider [connect]="true" [behaviour]= "'drag'" [min]="sliderMinValue" [max]="sliderMaxValue" [step]="1" [(ngModel)]="filterObject.filterData[0]['defaultValue']" (ngModelChange)="onChange($event,filterObject.filterName+'Year')" [limit]="6" [tooltips]="tooltipYear"></nouislider>
+                    </div>
+                </div>-->
+                <div *ngIf="cascadeDependency == 'cropComparison' || casecadeDependency =='priceComparison'">
+                    <div class="dgrey marginB5">
+                        <b>{{'Yearly '+filterObject.filterName}}</b>  <span class="lgrey size12">{{'('+ sliderSelected[0]+'-'+ sliderSelected[1]+')'}}</span>
+                    </div>
+                    <div class="paddingL10 marginB25">
+                        <nouislider [connect]="true" [behaviour]= "'drag'" [min]="sliderMinValue" [max]="sliderMaxValue" [step]="1" [(ngModel)]="sliderSelected" (ngModelChange)="onChange($event,filterObject.filterName+'Year')" [limit]="6" [tooltips]="tooltipYear"></nouislider>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-sm-4 col-xs-4 paddingLeft5 marginB10" #sliderQuarter *ngSwitchCase="'sliderq'">
+                <!--<div>
+                    <b>{{filterObject.filterName}}</b>{{'('+ filterObject.filterData[0].defaultValue[0]+'-'+ filterObject.filterData[0].defaultValue[1]+')'}}
+                </div>
+                <div>
+                    <nouislider [connect]="true" [behaviour]= "'drag'" [min]="filterObject.filterData[0]['minValue']" [max]="filterObject.filterData[0]['maxValue']" [step]="1" [(ngModel)]="filterObject.filterData[0]['defaultValue']" (ngModelChange)="onChange($event,filterObject.filterName+'Quarter')" [limit]="1"></nouislider>
+                </div>-->
+
+                <div class="dgrey marginB5">
+                    <b>{{'Quarterly '+filterObject.filterName}}</b>  <span class="lgrey size12">{{'('+ filterObject.filterData[0].defaultValue[0]+')'}}</span>
+                </div>
+                <div class="paddingL10 marginB25">
+                    <nouislider [connect]="true" [behaviour]= "'drag'" [min]="filterObject.filterData[0]['minValue']" [max]="filterObject.filterData[0]['maxValue']" [step]="1" [(ngModel)]="filterObject.filterData[0]['defaultValue'][0]" (ngModelChange)="onSliderQChange($event,filterObject.filterName+'Quarter')" [tooltips]="tooltipQuarter"></nouislider>
+                </div>
+            </div>
+
+            <div class="clear" *ngSwitchCase="'multiselect'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10" >
+
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <!--<p-multiSelect [options]="filterObject.filterData" [(ngModel)]="multiSelectValues" (ngModelChange)="onChangeMultiSelect($event,filterObject.filterName,filterObject.filterData)"
+                           [overlayVisible]="true"></p-multiSelect>-->
+                    <p-multiSelect class="multiShade" [options]="multiSelectList" [(ngModel)]="multiSelectValues" (ngModelChange)="onChangeMultiSelect($event,filterObject.filterName,filterObject.filterData)"
+                                   [overlayVisible]="true"></p-multiSelect>
+                    <p *ngIf="multiselectlimit > 1" class="lgrey size12 paddingT5">Maximum {{multiselectlimit}} can be selected</p>
+                    <p *ngIf="multiselectlimit == 1" class="lgrey size12 paddingT5">Only {{multiselectlimit}} can be selected</p>
+                </div>
+            </div>
+
+
+            <div *ngSwitchCase="'geographycascademultiselects'">
+
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10" *ngFor="let multiselect of filterObject.filterData; let i = index">
+                    <div class="dgrey bold marginB5">{{multiselect.filterName}}</div>
+                    <p-multiSelect [options]="geography[i]" [(ngModel)]="geographySelected[i]" (ngModelChange)="onChangeGeographyMultiSelect(geographySelected[i],multiselect.filterName,geography[i])"
+                                   [overlayVisible]="true"></p-multiSelect>
+                    <p *ngIf="geographylimit > 1" class="lgrey size12 paddingT5">Maximum {{geographylimit}} can be selected</p>
+                    <p *ngIf="geographylimit == 1" class="lgrey size12 paddingT5">Only {{geographylimit}} can be selected</p>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10" #sliderQuarter *ngSwitchCase="'textbox'">
+                <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                <input type="text" />
+            </div>
+
+            <!--<div #dropdownlevel1 *ngSwitchCase="'dropdownlevel1'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div class="form-group padding0">
+                        <select (change)="onDropdownlevel1Change($event.target.value,filterObject)" class="form-control">
+                            <option *ngFor="let dd of filterObject.filterData; let i = index" value={{dd.labelId}} [selected]="filterObject.selectedData==dd.labelId">
+                                {{dd.label}}
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+            </div>-->
+            <div #dropdownlevel1 *ngSwitchCase="'dropdownlevel1'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div *ngIf="cascadeDependency == 'default'" class="form-group padding0">
+                        <select (change)="onDropdownlevel1Change($event.target.value,filterObject)" class="form-control">
+                            <option *ngFor="let dd of level1filterData; let i = index" value={{dd.labelId}} [selected]="100==dd.labelId" [ngClass]="{'grey-shade':dd.regionShade==1}">
+                                {{dd.label}}
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div *ngIf="cascadeDependency == 'crop' || cascadeDependency == 'region' || cascadeDependency == 'regionminussource'" class="form-group padding0">
+                        <select (change)="onDropdownlevel1Change($event.target.value,filterObject)" class="form-control">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let dd of level1filterData; let i = index" value={{dd.regionId}} [selected]="level1DefaultSelected==dd.regionId" [ngClass]="{'grey-shade':dd.regionShade==1}">
+                                {{dd.regionName}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div #dropdownlevel2 *ngSwitchCase="'dropdownlevel2'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div *ngIf="cascadeDependency == 'default'" class="form-group padding0">
+                        <select (change)="onDropdownlevel2Change($event.target.value,filterObject)" class="form-control">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let dd of level2filterData; let i = index" value={{dd.labelId}}>
+                                {{dd.label}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="cascadeDependency == 'crop' || cascadeDependency == 'region' || cascadeDependency == 'regionminussource'" class="form-group padding0">
+                        <select (change)="onDropdownlevel2Change($event.target.value,filterObject)" class="form-control">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let dd of level2filterData; let i = index" value={{dd.territoryId}} [ngClass]="{'grey-shade':dd.territoryShade==1}">
+                                {{dd.territoryName}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div #dropdownlevel3 *ngSwitchCase="'dropdownlevel3'">
+                <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+                    <div class="dgrey bold marginB5">{{filterObject.filterName}}</div>
+                    <div *ngIf="cascadeDependency == 'default'" class="form-group padding0">
+                        <select (change)="onDropdownlevel3Change($event.target.value,filterObject)" class="form-control">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let dd of level3filterData; let i = index" value={{dd.labelId}}>
+                                {{dd.label}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="cascadeDependency == 'crop' || cascadeDependency == 'region' || cascadeDependency == 'regionminussource'" class="form-group padding0">
+                        <select (change)="onDropdownlevel3Change($event.target.value,filterObject)" class="form-control">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let dd of level3filterData; let i = index" value={{dd.countryId}}>
+                                {{dd.countryName}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-md-3 col-sm-3 col-xs-3" *ngSwitchCase="'dropdownmultiplesource'">
+                <div *ngFor="let source of filterObject.filterData; let i = index">
+                    <div class="dgrey bold marginB5 marginT5">{{source.filterName}}</div>
+                    <div>
+                        <select (change)="onOverViewSourceDropdownChange($event.target.value,multipleSourceData[i].filterName,multipleSourceData[i],'html')" class="form-control">
+                            <option *ngIf='multipleSourceData[i]?.filterData?.length==0' value="0">--Select--</option>
+                            
+                            <option *ngFor="let dd of multipleSourceData[i]?.filterData" value={{dd.sourceId}} [selected]="multipleSourceData[i]?.selectedData==dd.sourceId">
+                                {{dd.sourceName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>-->
+            <!--<div *ngSwitchCase="'dropdownmultiplesource'">
+                <div  class="clearfix"></div>
+                Sources: Default recommendation for sources has been chosen for you, if you’d like to change the source, please change it below, otherwise click on submit
+                <div class="clearfix"></div>
+                <div *ngFor="let sourceObject of multipleSourceData; let i = index" class="col-md-3 col-sm-3 col-xs-3 marginB10">
+                    <div class="dgrey bold marginB5 marginT5">{{sourceObject.filterName}} {{sourceObject?.sortOrder==0?'(No Source)':'('+sourceObject?.sortOrder+'-'}}{{sourceObject?.childControlMappingId==0?'':sourceObject?.childControlMappingId+')'}}</div>
+
+                    <div class="form-group">
+                        <select (change)="onOverViewSourceDropdownChange($event.target.value,multipleSourceData[i].filterName,multipleSourceData[i],'html')" class="form-control">
+                            <option *ngIf='multipleSourceData[i]?.filterData?.length==0' value="0">--Select--</option>
+
+                            <option *ngFor="let dd of multipleSourceData[i]?.filterData" value={{dd.sourceId}} [selected]="multipleSourceData[i]?.selectedData==dd.sourceId">
+                                {{dd.sourceName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>-->
+
+        </div>
+    </div>    
+
+    </div>
+<div *ngIf="multipleSourceData.length>0" class="col-md-5 col-xs-5 col-sm-12 pull-right cropGrey marginT-15 marginR-15 paddingT20">
+    <div class="clearfix"></div>
+    <div class="col-md-12 bold sourceMsg marginB15 size11">Recommended source can provide the best result; change the source only if required</div>
+    <div *ngFor="let sourceObject of multipleSourceData; let i = index" class="col-md-9 col-sm-3 col-xs-3 marginB10">
+        <div class="dgrey size12 bold marginB5 marginT5">{{sourceObject.filterName}} {{sourceObject?.sortOrder==0?'(No Source)':'('+sourceObject?.sortOrder+'-'}}{{sourceObject?.childControlMappingId==0?'':sourceObject?.childControlMappingId+')'}}</div>
+
+        <div class="form-group">
+            <select (change)="onOverViewSourceDropdownChange($event.target.value,multipleSourceData[i].filterName,multipleSourceData[i],'html')" class="form-control">
+                <option *ngIf='multipleSourceData[i]?.filterData?.length==0' value="0">--Select--</option>
+
+                <option *ngFor="let dd of multipleSourceData[i]?.filterData" value={{dd.sourceId}} [selected]="multipleSourceData[i]?.selectedData==dd.sourceId">
+                    {{dd.sourceName}}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row marginT20">
+    <div *ngFor="let sourceObject of sourceList">
+        <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB10">
+            <div class="dgrey bold marginB5">{{sourceObject.filterName}} {{sourceObject?.sortOrder==0?'(No Source)':'('+sourceObject?.sortOrder+'-'}}{{sourceObject?.childControlMappingId==0?'':sourceObject?.childControlMappingId+')'}}</div>
+            <div class="form-group padding0">
+                <select (change)="onSourceChange($event.target.value,sourceObject.filterName,sourceObject,'html')" class="form-control">
+                    <option *ngIf='sourceObject.filterData?.length==0' value="0">--Select--</option>
+                    <option *ngFor="let dd of sourceObject?.filterData" value={{dd.sourceId}} [selected]="sourceObject?.selectedData==dd.sourceId">
+                        {{dd.sourceName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿{
+  "data": [
+    {
+      "insightId": 1,
+      "insightData": "If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.",
+      "author": "Fiat",
+      "modifiedDate": "2017-12-07 17:46:45.333",
+      "createdBy": "b53e8280-dbc8-47a5-97db-1ffe5a23a179"
+    },
+    {
+      "insightId": 2,
+      "insightData": "If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.",
+      "author": "Renault",
+      "modifiedDate": "2017-12-07 17:46:45.333",
+      "createdBy": "EEC14B83-B98D-42DE-81C8-E3C7E3B769E1"
+    },
+    {
+      "insightId": 3,
+      "insightData": "If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.",
+      "author": "Renault",
+      "modifiedDate": "2017-12-06 17:46:45.333",
+      "createdBy": "b53e8280-dbc8-47a5-97db-1ffe5a23a179"
+    },
+    {
+      "insightId": 4,
+      "insightData": "If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.",
+      "author": "VW",
+      "modifiedDate": "2017-12-05 17:46:45.333",
+      "createdBy": "EEC14B83-B98D-42DE-81C8-E3C7E3B769E1"
+    },
+    {
+      "insightId": 5,
+      "insightData": "If you use animation in one of your components, you should add an animations extra-property to the @Component decorator.",
+      "author": "Fiat",
+      "modifiedDate": "2017-12-04 17:46:45.333",
+      "createdBy": "b53e8280-dbc8-47a5-97db-1ffe5a23a179"
+    }
+  ]
+}

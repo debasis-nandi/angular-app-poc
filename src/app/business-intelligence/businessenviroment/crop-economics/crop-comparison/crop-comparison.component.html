@@ -1,0 +1,158 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div class="min200">
+    <div *ngIf="data">
+        <section class="paddingMob10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding0">
+                        <h1 class="col-md-11 col-xs-10 padding0">Crop Comparison</h1>
+                        <!--<div class="inner-tabs "> </div>
+                        <h2 class="paddingB0 marginB0 blueshade">Choose Parameters</h2>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding8LR">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default" id="panelFilter">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a id="CPFilter" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">Filters</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFilter" class="panel-collapse collapse in" role="tabpanel">
+                                    <div class="panel-body">
+                                        <div class="blue-boxes-new animated fadeInDown innerTop marginT0">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-xs-12 paddingT0L8 ">
+                                                        <p class="dgrey size18 bold marginT10 marginB15">Select X-Axis Time Series </p>
+                                                        <my-filter *ngIf="data.filters" [filtersList]="data.filters" [filtersRelationList]="data.filtersRelation" (selectedValueEmit)='onFilterEmit($event)' (submitVisible)="onSubmitEmit($event)">
+                                                            <div class="col-md-12">
+                                                                <p class="dgrey size18 bold marginT20 marginB15">Select Y-Axis  </p>
+                                                            </div>
+                                                        </my-filter>
+                                                        <button class="btn marginB20" (click)="Reset(pagePopover)">Reset</button>
+                                                        <button class="btn marginB20" (click)="Submit(pagePopover)" [disabled]="submitVisible">Submit</button>
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="graphs" class="paddingMob10">
+            <div class="container">
+                <div class="row padding8LR">
+                    <div *ngIf="selectedFilters?.length>0" class="col-md-12 col-sm-12 col-xs-12 selected-filter marginB20 ">
+                        <div class="size13 bold">Filters applied</div>
+                        <ul>
+                            <li *ngFor="let filter of selectedFilters"><strong>{{filter.filterName}}:</strong> {{filter.selectedValues}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="graph-boxes floatNone text-center width99" *ngIf="data.widgets.length==0 && noDataMessage">
+                        <span class="no-data">{{noDataMessage}}</span>
+                    </div>
+                    <div *ngIf="data.widgets.length!=0">
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding0" id="firstselection" *ngFor="let obj of data.widgets; let i = index">
+
+                            <div class="graph-boxes floatNone width99">
+                                <h2>{{obj?.widgetName}} </h2>
+                                <!--<div class="col-md-3 col-sm-3 col-xs-12 text-right paddingT20 paddingMob0">
+                                    <div *ngFor="let action of data.actions">
+                                        <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                                            <my-action id="export" [actionObject]="action">
+                                            </my-action>
+                                            <div class="toggleExport" style="display: none;">
+                                                <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                    <my-export [exportsList]="data.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                                    <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(action.actionName|lowercase) !=='filter' && (action.actionName|lowercase) !=='export'">
+                                            <my-action [actionObject]="action">
+                                            </my-action>
+                                        </div>
+                                    </div>
+
+                                </div>-->
+                                <!--<div class="col-md-2 col-sm-2 col-xs-2 pull-right text-right padding0 posRelative paddingT10 paddingMob0" *ngIf="showFlexi">
+                                    <a href="javascript:void(0)" class="widget_big hidden-xs" (click)="ChartTypeChange('line')" title=""><i class="fa fa-line-chart pull-right" [ngClass]="{'active': !isColumn}"></i></a>
+                                    <a href="javascript:void(0)" class="widget_big hidden-xs" (click)="ChartTypeChange('column')" title=""><i class="fa fa-bar-chart pull-right" [ngClass]="{'active':isColumn }"></i></a>
+                                </div>-->
+                                <div class="col-md-3 col-sm-3 col-xs-3 pull-right text-right padding0 posRelative paddingMob0">
+                                    <div *ngFor="let action of data.actions">
+                                        <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                                            <my-action id="export" [actionObject]="action">
+                                            </my-action>
+                                            <div class="toggleExport" style="display: none;">
+                                                <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                    <my-export [exportsList]="data.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                                    <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0)" *ngIf="showFlexi" class="widget_big hidden-xs" (click)="ChartTypeChange('line')" title=""><i class="fa fa-line-chart" [ngClass]="{'active': !isColumn}"></i></a>
+                                    <a href="javascript:void(0)" *ngIf="showFlexi" class="widget_big hidden-xs" (click)="ChartTypeChange('column')" title=""><i class="fa fa-bar-chart" [ngClass]="{'active':isColumn }"></i></a>
+                                </div>
+
+
+                                <div id="exTab2">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"> <a href="#{{i}}c" (click)="showFlexi=true" data-toggle="tab">Chart</a> </li>
+                                        <li><a href="#{{i}}u" (click)="showFlexi=false" data-toggle="tab">Underlying Data</a> </li>
+                                    </ul>
+                                    <div class="tab-content marginT20">
+                                        <div class="tab-pane active animated textcenter fadeInUp" id="{{i}}c">
+                                            <my-chart [charts]="obj.chartComponentViewModel" [chartId]="obj.widgetId"></my-chart>
+                                        </div>
+                                        <div class="tab-pane animated fadeInUp" id="{{i}}u">
+
+                                            <underlying-table [tableHeader]="obj.underlyingChartDataViewModel?.tableHeaders"
+                                                              [tableData]="obj.underlyingChartDataViewModel?.tableRows"
+                                                              [paginator]="paginator"
+                                                              [pageLinks]="pageLinks"
+                                                              [rowsPerPage]="rowsPerPage"
+                                                              [rowsPerPageOptions]="rowsPerPageOptions"
+                                                              [responsive]="responsive">
+                                            </underlying-table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div *ngIf="blankCrops">
+                                    <p style="text-align:center"><i>Data is not available for <b>{{blankCrops}}</b> against the selected filters</i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="container">
+                <div class="row">
+                    <div class="col-md-12  paddingT10"><a [routerLink]="[ '/layout/kmsearch',getPageModuleId()]">View Raw Data for Crop Economics</a></div>
+                </div>
+            </div>-->
+        </section>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿
+<div *ngIf="insightList && showDataList" class="animated fadeInUp">
+    <p-dataList *ngIf="showContent" [value]="insightList">
+        <ng-template let-obj pTemplate="item">
+            <div (click)="showMoreContent(obj)" class="col-md-10 col-sm-10 col-xs-12 paddingR0">
+                <div class="bold">{{obj.insightTitle}}</div>
+                <div class="data-insight-title" [ngClass]="insightTitleClass" style="font-family:Arial" [innerHTML]='obj.insightData | RegexReplace:"<br />,<wbr />":"&nbsp;":"true" | SafeHtmls'></div>
+                <div class="clearfix"></div>
+                <p class="paddingTop10 size12 col-md-11 padding0 lgrey"><strong>Author: </strong>{{obj.author}}  &nbsp;|&nbsp; <strong>Last updated: </strong>{{obj.updatedDate | date:'dd MMMM yyyy'}} <!--&nbsp;|&nbsp; <strong>Filters: </strong>{{obj.appliedFiltersDisplay}}--></p>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12 textcenter paddingR0">
+                <div *ngIf="IsAdmin && (userId == obj.updatedBy.toLowerCase())">
+                    <a href="javaScript:void(0)" (click)="onEditClick(obj)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size20 lgrey"></i></a>
+                    <a href="javaScript:void(0)" (click)="onDeleteClick(obj)" class="marginR10" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o size20 lgrey"></i></a>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataList>
+
+    <div *ngIf="showContent && IsAdmin">
+        <span *ngIf="statusDesc && statusDesc != ''" [ngClass]="statusClass" class="marginL20">{{statusDesc}}</span>
+        <button class="btn btn-primary pull-right" (click)="NewInsightClick()">Add New Insight</button>
+    </div>
+    <div *ngIf="!showContent">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="{{headerClass}}">{{contentDefinition.insightTitle}}<span (click)="onClose()" class="pull-right clickable"><i class="fa fa-times"></i></span></div>
+                <div class="{{bodyClass}}" style="font-family:Arial" [innerHTML]="contentDefinition.insightData | SafeHtmls"></div>
+                <div class="{{bodyClass}}">
+                    <strong>Author: </strong>{{contentDefinition.author}} | <strong>Last Updated: </strong>{{contentDefinition.updatedDate|date:'dd MMMM yyyy'}} <!--&nbsp;|&nbsp; <strong>Filters: </strong>{{contentDefinition.appliedFiltersDisplay}}-->
+                    <div *ngIf="IsAdmin && (userId == contentDefinition.updatedBy.toLowerCase())">
+                        <a href="javaScript:void(0)" class="pull-right" (click)="onEditClick(contentDefinition)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size20 lgrey"></i></a> <a href="javaScript:void(0)" (click)="onDeleteClick(contentDefinition)" class="pull-right marginR10" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o size20 lgrey"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!showDataList">
+
+    <button *ngIf="showBackButton" class="noBtn pull-right" (click)="back()"><i class="fa fa-times"></i></button>
+    <div tinyMceEditor [mceDefaultContent]="insightsData" [innerHTML]="insightsData"
+         (onEditorContentChange)="EditorContentChangeHandler($event)" (CharLeft)="ChartLeftHandler($event)" (onEditorFocus)="EditorFocusHandler($event)" [EditorId]="EditorId" [setEditor]="initEditor" [maxAllowedLength]="maxAllowedLength" [editorPlaceHolder]="editorPlaceHolder" [editorClasses]="insightsClasses">
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 text-right paddingR0">
+        <button class="noBtn" [hidden]="isAddInsightDisabled" (click)="SaveInsights()"><i class="fa size20 lblue fa-check-circle"></i></button>
+    </div>
+    <div>
+        <span [hidden]="isAddInsightDisabled">Characters left: {{charLeft}}</span>
+        
+    </div>
+</div>
+<app-modal [modalclasses]="modalclasses">
+    <div class="app-modal-header">
+        <button type="button" class="close" (click)="onClose(false)">&times;</button>
+        <h4 class="modal-title">{{confirmHeader}}</h4>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <strong>{{confirmDescription}}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-default" (click)="onCloseModal(true)">Ok</button>
+                <button *ngIf="isConfirm" type="button" class="btn btn-default" (click)="onCloseModal(false)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</app-modal>

@@ -1,0 +1,21 @@
+﻿<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog {{modalclasses.csModalDialog}}">
+        <div class="modal-content">
+            <div class="modal-header {{modalclasses?.csModalHeader}}">
+                <ng-content select=".app-modal-header"></ng-content>
+            </div>
+            <div class="modal-body {{modalclasses?.csModalBody}}">
+                <ng-content select=".app-modal-body"></ng-content>
+            </div>
+            <div class="modal-footer {{modalclasses?.csModalFooter}}">
+                <ng-content select=".app-modal-footer"></ng-content>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

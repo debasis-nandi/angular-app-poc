@@ -1,0 +1,111 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div class="min200">
+    <div *ngIf="data">
+        <section class="paddingMob10">
+            <div class="container">
+                <div class="row">
+                    <!--<h1 class="col-md-11 col-xs-10 padding0">Monsanto</h1>-->
+                    <div class="col-md-12 col-xs-12 padding8LR">
+                        <h1 class="col-md-9 col-xs-9 padding0">Commodity Price</h1>
+                        <div class="col-md-3 col-sm-3 col-xs-12 text-right paddingT20 paddingMob0">
+
+                            <div *ngFor="let action of data.actions">
+                                <div *ngIf="(action.actionName|lowercase) ==='filter'" class="posIcon">
+                                    <my-action id="filter" [actionObject]="action">
+                                    </my-action>
+                                    <div class="toggleFilter" style="display: none;">
+                                        <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                            <my-filter [filtersList]="data.filters" (selectedValueEmit)='onFilterEmit($event)'> </my-filter>
+                                            <button id="filterSubmit" class="btn marginB10" (click)="FilterSubmit(pagePopover)">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                                    <my-action id="export" [actionObject]="action">
+                                    </my-action>
+                                    <div class="toggleExport" style="display: none;">
+                                        <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                            <my-export [exportsList]="data.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                            <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="(action.actionName|lowercase) !=='filter' && (action.actionName|lowercase) !=='export'">
+                                    <my-action [actionObject]="action">
+                                    </my-action>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inner-tabs">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="graphs" class="paddingMob10">
+            <div class="container">
+                <div class="row">
+                    <div class="graph-boxes floatNone text-center" *ngIf="data.widgets== null || data.widgets.length== 0">
+                        <span class="no-data">
+                            No data found
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding0" *ngFor="let obj of data.widgets; let i = index">
+
+                        <div class="graph-boxes">
+                            <h2>{{obj.widgetName}}</h2>
+                            <div id="exTab2">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"> <a href="#{{i}}c" data-toggle="tab">Chart</a> </li>
+                                    <li><a href="#{{i}}u" data-toggle="tab">Underlying Data</a> </li>
+                                </ul>
+                                <div class="tab-content marginT20">
+                                    <div class="tab-pane active animated fadeInUp" id="{{i}}c">
+                                        <my-chart [charts]="obj.chartComponentViewModel" [chartId]="obj?.widgetId"></my-chart>
+                                    </div>
+                                    <div class="tab-pane animated fadeInUp" id="{{i}}u">
+
+                                        <underlying-table [tableHeader]="obj?.underlyingChartDataViewModel?.tableHeaders"
+                                                          [tableData]="obj?.underlyingChartDataViewModel?.tableRows"
+                                                          [paginator]="paginator"
+                                                          [pageLinks]="pageLinks"
+                                                          [rowsPerPage]="rowsPerPage"
+                                                          [rowsPerPageOptions]="rowsPerPageOptions"
+                                                          [responsive]="responsive">
+                                        </underlying-table>
+                                    </div>
+                                </div>
+                                <span class="pull-left lgrey size12">Last updated: {{obj.lastUpdated}}</span> <span class="pull-right lgrey size12 sourcemob">Source: {{obj.sourceName}}</span>
+                                <div class="col-md-12 col-xs-12 padding0 marginT20 borderTop" *ngIf="obj.insightData">
+                                    <p class="size16 bold dgrey paddingT15 col-md-11 col-xs-10 paddingL0"> Insight</p>
+                                    <div class="col-md-1 col-xs-2 paddingT15">
+                                        <a href="javascript:void(0)" title="Add/Edit insight" class="editviewBtn" *ngIf="isAdmin" (click)="editChartInsight($event, obj.widgetId, obj.insightData,i)">
+                                            <span class="fa fa-pencil-square-o fa-2x lblue"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-xs-12 padding0">
+                                        <div class="viewText col-md-11 padding0 size12 animated fadeInUp">
+                                            <!--<my-rich-text [insightData]="obj.insightData" [widgetId]="obj.widgetId"></my-rich-text>-->
+                                            <div id="richTextInsight{{i}}" class="glyphicon size11 marginR5 insightScrollDisplay" [innerHtml]="obj.insightData"></div>
+                                            <!--<p> <span class="glyphicon glyphicon-menu-right lgrey size11 marginR5"></span>This is a placeholder for Syngenta admin to add their analysis.</p>
+                                            <p> <span class="glyphicon glyphicon-menu-right lgrey size11 marginR5"></span>If there is no text here added here, the insight placeholder will not be visible. </p>-->
+                                        </div>
+                                    </div>
+
+                                    <span class="pull-left lgrey size12 marginT10">Insight last updated: {{obj.insightLastUpdated | date:'dd MMM yyyy'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</div>

@@ -1,0 +1,5 @@
+﻿<p-dataTable [tableStyleClass]="styleClass" [value]="tableData" [paginator]="paginator" [scrollable]="scrollable" scrollHeight="250px" [rows]="rowsPerPage" [pageLinks]="pageLinks" [rowsPerPageOptions]="rowsPerPageOptions">
+    <p-column *ngFor="let item of tableHeader" [header]="item.headerText" [field]="item.header" [hidden]="item.isColumnVisible">
+
+    </p-column>
+</p-dataTable>

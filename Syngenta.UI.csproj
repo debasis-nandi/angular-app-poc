@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8C4C67EA-A662-4216-B5E1-BE3F9E55D86F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Syngenta.UI</RootNamespace>
+    <AssemblyName>Syngenta.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="bs-config.json" />
+    <Content Include="package.json" />
+    <Content Include="src\app\about-portal\about-portal.component.html" />
+    <Content Include="src\app\about-team\about-team.component.html" />
+    <Content Include="src\app\adal-service\adal.js" />
+    <Content Include="src\app\adal-service\ADAL_License.txt" />
+    <Content Include="src\app\admin\add-new-user.component.html" />
+    <Content Include="src\app\admin\admin.component.html" />
+    <Content Include="src\app\admin\authorise\authorise.component.css" />
+    <Content Include="src\app\admin\authorise\authorise.component.html" />
+    <Content Include="src\app\admin\glossary\addglossary.component.html" />
+    <Content Include="src\app\admin\glossary\viewglossary.component.html" />
+    <Content Include="src\app\admin\manage-user-authorization.component.html" />
+    <Content Include="src\app\admin\mapping.component.html" />
+    <Content Include="src\app\admin\metadata.component.html" />
+    <Content Include="src\app\admin\upload-data\upload-data.component.css" />
+    <Content Include="src\app\admin\upload-data\upload-data.component.html" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="src\app\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\app\assets\images\1.PNG" />
+    <Content Include="src\app\assets\images\2.PNG" />
+    <Content Include="src\app\assets\images\alejandro.png" />
+    <Content Include="src\app\assets\images\bruno.png" />
+    <Content Include="src\app\assets\images\favicon.ico" />
+    <Content Include="src\app\assets\images\federico.png" />
+    <Content Include="src\app\assets\images\home_text.png" />
+    <Content Include="src\app\assets\images\home_text_2500.png" />
+    <Content Include="src\app\assets\images\ivy.png" />
+    <Content Include="src\app\assets\images\joelle.png" />
+    <Content Include="src\app\assets\images\joern.png" />
+    <Content Include="src\app\assets\images\logo-mob.png" />
+    <Content Include="src\app\assets\images\logo.PNG" />
+    <Content Include="src\app\assets\images\lynn.png" />
+    <Content Include="src\app\assets\images\mark.png" />
+    <Content Include="src\app\assets\images\Monsanto2.PNG" />
+    <Content Include="src\app\assets\images\Monsanto3.PNG" />
+    <Content Include="src\app\assets\images\Monsanto4.PNG" />
+    <Content Include="src\app\assets\images\Monsanto_logo.png" />
+    <Content Include="src\app\assets\images\morgane.png" />
+    <Content Include="src\app\assets\images\morrow.png" />
+    <Content Include="src\app\assets\images\nathalie.png" />
+    <Content Include="src\app\assets\images\pic-prisca.jpg" />
+    <Content Include="src\app\assets\images\pierpaolo.png" />
+    <Content Include="src\app\assets\images\profile-pic.png" />
+    <Content Include="src\app\assets\images\reinhard.png" />
+    <Content Include="src\app\assets\images\reinier.png" />
+    <Content Include="src\app\assets\images\slide1.jpg" />
+    <Content Include="src\app\assets\images\the_good_growth.png" />
+    <Content Include="src\app\assets\images\williams.png" />
+    <Content Include="src\app\assets\script\bootstrap-slider.js" />
+    <Content Include="src\app\assets\script\bootstrap.min.js" />
+    <Content Include="src\app\assets\script\canvg.js" />
+    <Content Include="src\app\assets\script\ExportHtmlAsImage.js" />
+    <Content Include="src\app\assets\script\HtmlToCanvas.js" />
+    <Content Include="src\app\assets\script\jquery-ui.js" />
+    <Content Include="src\app\assets\script\jquery.min.js" />
+    <Content Include="src\app\assets\script\master.js" />
+    <Content Include="src\app\assets\script\multirange.js" />
+    <Content Include="src\app\assets\script\rgbcolor.js" />
+    <Content Include="src\app\assets\script\ScrollScript.js" />
+    <Content Include="src\app\assets\script\slider.js" />
+    <Content Include="src\app\assets\style\animate.min.css" />
+    <Content Include="src\app\assets\style\bootstrap.min.css" />
+    <Content Include="src\app\assets\style\font-awesome.min.css" />
+    <Content Include="src\app\assets\style\jquery-ui.css" />
+    <Content Include="src\app\assets\style\multirange.css" />
+    <Content Include="src\app\assets\style\normalize.css" />
+    <Content Include="src\app\assets\style\slider.css" />
+    <Content Include="src\app\assets\style\style.css" />
+    <Content Include="src\app\business-intelligence\businessenviroment\agribusiness-overview\agribusiness-overview.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\biofuels\biofuels.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\comodity-price\commodity-price.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\crop-comparison\crop-comparison.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-menu.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-overview.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-price.component.html" />
+    <Content Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\competitor-comparison\competitor.comparison.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\competitormenu.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials-ratio.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major-agrochemicals-seeds.component.html" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials.component.html" />
+    <Content Include="src\app\business-intelligence\macroeconomics\currency-basket.component.html" />
+    <Content Include="src\app\business-intelligence\macroeconomics\macroeconomics-menu.component.html" />
+    <Content Include="src\app\business-intelligence\macroeconomics\economic-indicators.component.html" />
+    <Content Include="src\app\fw\menus\menu-item\menu-item.component.css" />
+    <Content Include="src\app\fw\menus\menu-item\menu-item.component.html" />
+    <Content Include="src\app\insights\addinsights.component.html" />
+    <Content Include="src\app\knowledge-management\km-recent-docs.component.html" />
+    <Content Include="src\app\knowledge-management\km-search-upload.component.css" />
+    <Content Include="src\app\knowledge-management\km-search-upload.component.html" />
+    <Content Include="src\app\knowledge-management\km-search.component.html" />
+    <Content Include="src\app\knowledge-management\km-upload-doc.component.html" />
+    <Content Include="src\app\layout\layout.component.html" />
+    <Content Include="src\app\loader\loader.component.html" />
+    <Content Include="src\app\BridgeToMyPage\BridgeToMyPage.component.html" />
+    <Content Include="src\app\login\login.component.html" />
+    <Content Include="src\app\mypage\mypage.component.html" />
+    <Content Include="src\app\query\query.component.css" />
+    <Content Include="src\app\search\search.component.html" />
+    <Content Include="src\app\search\search.json" />
+    <Content Include="src\app\admin\useranalytics\useranalytics.component.html" />
+    <Content Include="src\app\subscription\subscription.component.css" />
+    <Content Include="src\app\subscription\subscription.component.html" />
+    <Content Include="src\app\widgets\actions\action.component.html" />
+    <Content Include="src\app\widgets\breadcrumb\breadcrumb.component.html" />
+    <Content Include="src\app\widgets\charts\chart.component.html" />
+    <Content Include="src\app\widgets\datatable\datatable.component.css" />
+    <Content Include="src\app\widgets\datatable\datatable.component.html" />
+    <Content Include="src\app\widgets\email\email.component.html" />
+    <Content Include="src\app\widgets\event-calendar\event-modal.component.html" />
+    <Content Include="src\app\widgets\export\export.component.html" />
+    <Content Include="src\app\widgets\favourites\favourites.component.html" />
+    <Content Include="src\app\widgets\footer-note\footer-note.component.html" />
+    <Content Include="src\app\widgets\glossary\glossary.component.html" />
+    <Content Include="src\app\widgets\menu\menu.component.html" />
+    <Content Include="src\app\widgets\modals\modal.component.css" />
+    <Content Include="src\app\widgets\paginator\paginator.component.css" />
+    <Content Include="src\app\widgets\paginator\paginator.component.html" />
+    <Content Include="src\app\widgets\popover\popover.component.html" />
+    <Content Include="src\app\query\query.component.html" />
+    <Content Include="src\app\widgets\search-template\chart-template.component.html" />
+    <Content Include="src\app\widgets\search-template\news-km-template.component.html" />
+    <Content Include="src\app\widgets\search-template\search-template.component.html" />
+    <Content Include="src\app\widgets\underlying-datatable\underlying-datatable.component.css" />
+    <Content Include="src\app\widgets\underlying-datatable\underlying-datatable.component.html" />
+    <Content Include="src\app\widgets\userprofile\userprofile.component.html" />
+    <Content Include="src\app\widgets\usertracking\usertracking.component.html" />
+    <Content Include="src\app\assets\images\assignrequest.gif" />
+    <Content Include="src\app\assets\images\download-file.gif" />
+    <Content Include="src\app\assets\images\filter.jpg" />
+    <Content Include="src\app\assets\skins\lightgray\content.inline.min.css" />
+    <Content Include="src\app\assets\skins\lightgray\content.min.css" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="src\app\assets\skins\lightgray\img\anchor.gif" />
+    <Content Include="src\app\assets\skins\lightgray\img\loader.gif" />
+    <Content Include="src\app\assets\skins\lightgray\img\object.gif" />
+    <Content Include="src\app\assets\skins\lightgray\img\trans.gif" />
+    <Content Include="src\app\assets\skins\lightgray\skin.min.css" />
+    <Content Include="src\app\widgets\filters\filter.component.html" />
+    <Content Include="src\app\widgets\modals\modal.component.html" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\app\fw\menus\menu\menu.component.css" />
+    <Content Include="src\app\fw\menus\menu\menu.component.html" />
+    <Content Include="src\index.html" />
+    <Content Include="src\styles.css" />
+    <Content Include="src\systemjs-angular-loader.js" />
+    <Content Include="src\systemjs.config.extras.js" />
+    <Content Include="src\systemjs.config.js" />
+    <Content Include="tslint.json" />
+    <Content Include="src\tsconfig.json" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="src\app\assets\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="src\app\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="src\app\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="src\app\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="src\app\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="src\app\assets\fonts\FontAwesome.otf" />
+    <Content Include="src\app\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="src\app\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="src\app\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="src\app\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\search.json" />
+    <Content Include="src\app\widgets\event-calendar\event-calendar.component.html" />
+    <None Include="Properties\PublishProfiles\Sygenta.pubxml" />
+    <Content Include="src\app\insights\datalist\datalist.component.html" />
+    <Content Include="src\app\insights\datalist\cars-large.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\about-portal\about-portal.component.ts" />
+    <TypeScriptCompile Include="src\app\about-portal\about-portal.model.ts" />
+    <TypeScriptCompile Include="src\app\about-portal\about-portal.module.ts" />
+    <TypeScriptCompile Include="src\app\about-portal\about-portal.routing.ts" />
+    <TypeScriptCompile Include="src\app\about-portal\about-portal.service.ts" />
+    <TypeScriptCompile Include="src\app\about-team\about-team.component.ts" />
+    <TypeScriptCompile Include="src\app\about-team\about-team.model.ts" />
+    <TypeScriptCompile Include="src\app\about-team\about-team.module.ts" />
+    <TypeScriptCompile Include="src\app\about-team\about-team.routing.ts" />
+    <TypeScriptCompile Include="src\app\about-team\about-team.service.ts" />
+    <TypeScriptCompile Include="src\app\adal-service\adal.service.ts" />
+    <TypeScriptCompile Include="src\app\adal-service\OAuthCallbackComponent.ts" />
+    <TypeScriptCompile Include="src\app\adal-service\OAuthCallbackHandler.ts" />
+    <TypeScriptCompile Include="src\app\adal-service\user.ts" />
+    <TypeScriptCompile Include="src\app\admin\add-new-user.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\add-new-user.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\add-new-user.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.ts" />
+    <TypeScriptCompile Include="src\app\admin\authorise\authorise.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\authorise\authorise.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\authorise\authorise.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\authorise\authorise.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\authorise\authorise.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\addglossary.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\addglossary.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\addglossary.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\viewglossary.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\viewglossary.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\glossary\viewglossary.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\manage-user-authorization.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\manage-user-authorization.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\manageuser.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\mapping.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\mapping.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\mapping.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\metadata.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\metadata.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\metadata.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\upload-data\upload-data.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\upload-data\upload-data.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\upload-data\upload-data.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\upload-data\upload-data.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\upload-data\upload-data.service.ts" />
+    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.menu.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\app.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\agribusiness-overview\agribusiness-overview.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\agribusiness-overview\agribusiness-overview.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\agribusiness-overview\agribusiness-overview.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\biofuels\biofuels.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\biofuels\biofuels.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\biofuels\biofuels.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\comodity-price\commodity-price.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\comodity-price\commodity-price.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\comodity-price\commodity-price.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\crop-comparison\crop-comparison.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\crop-comparison\crop-comparison.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\crop-comparison\crop-comparison.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-menu.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-menu.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-overview.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-overview.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-overview.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-price.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-price.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\crop-price.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.service.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\businessenviroment\crop-economics\main-crop-indicator\main-crop-indicator.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\competitor-comparison\competitor-comparison.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\competitor-comparison\competitor-comparison.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\competitor-comparison\competitor.comparison.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\competitormenu.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\competitormenu.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major.agrochemicals-seeds.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-competitorreports.service.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials-ratio.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials-ratio.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-news.service.ts" />
+    <TypeScriptCompile Include="src\app\guards\layoutauth.guard.ts" />
+    <TypeScriptCompile Include="src\app\http-interceptor\http.factory.ts" />
+    <TypeScriptCompile Include="src\app\http-interceptor\http.interceptor.ts" />
+    <TypeScriptCompile Include="src\app\insights\addinsights.component.ts" />
+    <TypeScriptCompile Include="src\app\insights\insights.model.ts" />
+    <TypeScriptCompile Include="src\app\insights\insights.module.ts" />
+    <TypeScriptCompile Include="src\app\insights\insights.service.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-recent-docs.component.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-recent-docs.module.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-recent-docs.routing.ts" />
+    <TypeScriptCompile Include="src\app\layout\layout.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major-agrochemicals-seeds.model.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major-agrochemicals-seeds.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials-ratio.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.routing.ts" />
+    <TypeScriptCompile Include="src\app\layout\layout.service.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-snapshot.service.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major-agrochemicals-seeds.service.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\major.agrochemicals-seeds.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\competitive-landscape\major-agrochemicals-seeds\mas-financials.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\currency-basket.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\currency-basket.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\currency-basket.routing.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\macroeconomics-menu.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\macroeconomics-menu.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\economic-indicators.component.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\economic-indicators.module.ts" />
+    <TypeScriptCompile Include="src\app\business-intelligence\macroeconomics\economic-indicators.routing.ts" />
+    <TypeScriptCompile Include="src\app\fw\menus\menu-item\menu-item.component.ts" />
+    <TypeScriptCompile Include="src\app\global\global.config.ts" />
+    <TypeScriptCompile Include="src\app\global\global.util.ts" />
+    <TypeScriptCompile Include="src\app\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search-upload.component.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search-upload.model.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search-upload.module.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search-upload.service.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search.component.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search.module.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-search.routing.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-upload-doc.component.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-upload-doc.module.ts" />
+    <TypeScriptCompile Include="src\app\knowledge-management\km-upload-doc.routing.ts" />
+    <TypeScriptCompile Include="src\app\layout\layout.component.ts" />
+    <TypeScriptCompile Include="src\app\layout\layout.module.ts" />
+    <TypeScriptCompile Include="src\app\loader\loader.component.ts" />
+    <TypeScriptCompile Include="src\app\loader\loader.module.ts" />
+    <TypeScriptCompile Include="src\app\BridgeToMyPage\BridgeToMyPage.component.ts" />
+    <TypeScriptCompile Include="src\app\BridgeToMyPage\BridgeToMyPage.module.ts" />
+    <TypeScriptCompile Include="src\app\BridgeToMyPage\BridgeToMyPage.routing.ts" />
+    <TypeScriptCompile Include="src\app\BridgeToMyPage\BridgeToMyPage.service.ts" />
+    <TypeScriptCompile Include="src\app\BridgeToMyPage\BridgeToMyPage.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login.routing.ts" />
+    <TypeScriptCompile Include="src\app\login\login.service.ts" />
+    <TypeScriptCompile Include="src\app\login\login.ts" />
+    <TypeScriptCompile Include="src\app\mypage\mypage.component.ts" />
+    <TypeScriptCompile Include="src\app\mypage\mypage.module.ts" />
+    <TypeScriptCompile Include="src\app\mypage\mypage.routing.ts" />
+    <TypeScriptCompile Include="src\app\pipes\RegexReplace.pipe.ts" />
+    <TypeScriptCompile Include="src\app\pipes\custompipes.module.ts" />
+    <TypeScriptCompile Include="src\app\pipes\SafeHtmls.pipe.ts" />
+    <TypeScriptCompile Include="src\app\query\query.routing.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\search\search.component.ts" />
+    <TypeScriptCompile Include="src\app\search\search.model.ts" />
+    <TypeScriptCompile Include="src\app\search\search.module.ts" />
+    <TypeScriptCompile Include="src\app\search\search.routing.ts" />
+    <TypeScriptCompile Include="src\app\search\search.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\useranalytics\useranalytics.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\useranalytics\useranalytics.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\useranalytics\useranalytics.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\useranalytics\useranalytics.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\useranalytics\useranalytics.service.ts" />
+    <TypeScriptCompile Include="src\app\subscription\subscription.component.ts" />
+    <TypeScriptCompile Include="src\app\subscription\subscription.model.ts" />
+    <TypeScriptCompile Include="src\app\subscription\subscription.module.ts" />
+    <TypeScriptCompile Include="src\app\subscription\subscription.routing.ts" />
+    <TypeScriptCompile Include="src\app\subscription\subscription.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\actions\action.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\actions\action.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\breadcrumb\breadcrumb.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\breadcrumb\breadcrumb.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\breadcrumb\breadcrumb.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\breadcrumb\breadcrumb.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\charts\chart.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\charts\chart.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\charts\chart.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\charts\chart.ts" />
+    <TypeScriptCompile Include="src\app\insights\datalist\datalist.component.ts" />
+    <TypeScriptCompile Include="src\app\insights\datalist\datalist.model.ts" />
+    <TypeScriptCompile Include="src\app\insights\datalist\datalist.module.ts" />
+    <TypeScriptCompile Include="src\app\insights\datalist\datalist.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\datatable\datatable.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\datatable\datatable.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\datatable\datatable.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\datatable\datatable.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\datatable\EmptyStringPipe.filter.ts" />
+    <TypeScriptCompile Include="src\app\widgets\email\email.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\email\email.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\email\email.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\email\email.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-calendar.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-calendar.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-calendar.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-calendar.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-modal.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\event-calendar\event-modal.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\export\export.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\export\export.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\export\Export.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\export\export.ts" />
+    <TypeScriptCompile Include="src\app\widgets\favourites\favourites.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\favourites\favourites.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\favourites\favourites.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\favourites\favourites.ts" />
+    <TypeScriptCompile Include="src\app\widgets\footer-note\footer-note.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\glossary\glossary.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\glossary\glossary.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\glossary\glossary.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\glossary\glossary.ts" />
+    <TypeScriptCompile Include="src\app\widgets\menu\menu.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\menu\menu.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\menu\menu.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\menu\menu.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\modals\modal.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\paginator\paginator.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\paginator\paginator.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\paginator\paginator.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\popover\popover.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\popover\popover.module.ts" />
+    <TypeScriptCompile Include="src\app\query\query.component.ts" />
+    <TypeScriptCompile Include="src\app\query\query.model.ts" />
+    <TypeScriptCompile Include="src\app\query\query.module.ts" />
+    <TypeScriptCompile Include="src\app\query\query.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\search-template\chart-template.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\search-template\news-km-template.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\search-template\search-template.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\search-template\search-template.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\search-template\search-template.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\tinymce\editor.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\tinymce\editor.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\filters\filter.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\filters\filter.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\modals\modal.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\modals\modal.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\tinymce\tinymce.directive.ts" />
+    <TypeScriptCompile Include="src\app\widgets\tinymce\tinymce.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\underlying-datatable\underlying-datatable.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\underlying-datatable\underlying-datatable.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\userprofile\userprofile.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\userprofile\userprofile.model.ts" />
+    <TypeScriptCompile Include="src\app\widgets\userprofile\userprofile.module.ts" />
+    <TypeScriptCompile Include="src\app\widgets\userprofile\userprofile.service.ts" />
+    <TypeScriptCompile Include="src\app\widgets\usertracking\usertracking.component.ts" />
+    <TypeScriptCompile Include="src\app\widgets\usertracking\usertracking.service.ts" />
+    <TypeScriptCompile Include="src\app\fw\menus\menu\menu.component.ts" />
+    <TypeScriptCompile Include="src\app\fw\services\menu.service.ts" />
+    <TypeScriptCompile Include="src\app\fw\services\screen.service.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55099</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55091/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

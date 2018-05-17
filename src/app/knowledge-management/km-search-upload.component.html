@@ -1,0 +1,295 @@
+﻿<div><my-loader [loading]="loading"></my-loader></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 padding8LR">
+            <div class="row">
+                <h2 *ngIf="!isKmUploadDoc" class="col-md-12 paddingB0 marginB0 marginT0 marginL25">
+                    <span class="lgrey size11 pull-right paddingT15 marginR25">Start with selection of module</span>
+                </h2>
+                <h2 *ngIf="isKmUploadDoc" class="col-md-12 paddingB0 marginB0 marginT0 marginL25">
+                    <!--Choose Parameters-->
+                    <span class="lgrey size11 pull-right paddingT15 marginR25">All * marked fields are mandatory </span>
+                </h2>
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="blue-boxes animated fadeInDown innerTop borderT2blue">
+                        <div class="">
+                            <!-- for search doc section -->
+                            <div class="row" *ngIf="!isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label for="usr" class="dgrey">Enter Keywords</label>
+                                            <input type="text" id="title" class="form-control" placeholder="Type or enter keywords" [(ngModel)]="model.keyword" (keypress)="onKeypress($event)" (change)="onChange($event)">
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Document Type</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" [(ngModel)]="model.docSelectedType">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.docTypeList" [value]="item.value">{{item.label}}</option>
+                                            </select>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <!-- for upload doc section -->
+                            <div class="row" *ngIf="isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                        <div class="form-group">
+                                            <label for="usr" class="dgrey">Title<span class="mandatory"> *</span>  </label>
+                                            <input type="text" class="form-control" [(ngModel)]="model.title" placeholder="Type or enter title" (keypress)="onKeypress($event, 100)" (change)="onChangeTitle($event, 100)">
+                                            <span class="red">{{titleMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- for upload doc section -->
+                            <div class="row" *ngIf="isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="dgrey">Description</label>
+                                                <textarea class="form-control" rows="5" [(ngModel)]="model.description" placeholder="Type description" (keypress)="onKeypress($event, 500)" (change)="onChangeDes($event, 500)"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- for both section -->
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Module<span *ngIf="isKmUploadDoc" class="mandatory"> *</span></label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" [(ngModel)]="model.docSelectedModules" (change)="onChangeModule($event.target.value)">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.moduleList" [value]="item.value">{{item.label}}</option>
+                                            </select>
+                                            <span class="red">{{moduleMsg}}</span>
+                                        </div>
+                                        <!--<p-multiSelect id="multiSelectModule" [options]="model.moduleList" [(ngModel)]="model.docSelectedModules"
+                                                       (ngModelChange)="onChangeModule($event)"  [overlayVisible]="true">
+                                        </p-multiSelect>-->
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Document Type<span *ngIf="isKmUploadDoc" class="mandatory"> *</span></label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select *ngIf="!showDocTypeByModule" class="form-control">
+                                                <option value="0" selected>Select</option>
+                                            </select>
+                                            <select *ngIf="showDocTypeByModule" class="form-control" [(ngModel)]="model.docSelectedType" (change)="onChangeDocumentType($event)">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.docTypeList" [value]="item.value">{{item.label}}</option>
+                                            </select>
+                                            <span class="red">{{docTypeMsg}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="showCompetitor && !showRegion" class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Competitor" class="dgrey">Competitor</label>
+                                        </div>
+                                        <p-multiSelect id="multiSelectCompetitor" [options]="model.competitorsList" [(ngModel)]="model.docSelectedCompetitors" [overlayVisible]="true">
+                                        </p-multiSelect><div class="col-md-12 col-sm-12 col-xs-12 size12 paddingL0 paddingR0" *ngIf="isKmUploadDoc && showCompetitor">
+    <div class="form-group lineBelowControl">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" [(ngModel)]="model.isClr">
+                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>Add this report to the Latest Company Reports
+            </label>
+        </div>
+    </div>
+</div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div *ngIf="isKmUploadDoc" class="col-md-3 col-sm-4 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Notification" class="dgrey">Email Notification</label>
+                                        </div>
+                                        <div class="radio-widget-container-ui">
+                                            <div><p-radioButton name="group2" value="0" label="No Notification" [(ngModel)]="model.emailNotification" inputId="preopt1"></p-radioButton></div>
+                                            <div><p-radioButton name="group2" value="2" label="Immediately" [(ngModel)]="model.emailNotification" inputId="preopt2"></p-radioButton></div>
+                                            <div><p-radioButton name="group2" value="1" label="End of the day" [(ngModel)]="model.emailNotification" inputId="preopt3"></p-radioButton></div>
+
+                                        </div>
+
+                                    </div>
+                                    <div *ngIf="!showCompetitor && showRegion" class="col-md-3 col-sm-4 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Region" class="dgrey">Region<span *ngIf="isKmUploadDoc" class="mandatory"> *</span></label>
+                                        </div>
+                                        <p-multiSelect id="multiSelectRegion" [options]="model.regionList" [(ngModel)]="model.docSelectedRegions" [overlayVisible]="true"
+                                                       (ngModelChange)="onChangeRegion($event)">
+                                        </p-multiSelect>
+                                        <span class="red" *ngIf="isKmUploadDoc">{{regionMsg}}</span>
+                                    </div>
+                                    <div *ngIf="!showCompetitor && showRegion" class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Country</label>
+                                        </div>
+                                        <p-multiSelect id="multiSelectCountry" [options]="model.countryList" [(ngModel)]="model.docSelectedCountries" [overlayVisible]="true">
+                                        </p-multiSelect>
+                                    </div>
+
+                                    <!-- for search section -->
+                                    <!--<div class="col-md-3 col-sm-5 col-xs-12" *ngIf="!isKmUploadDoc">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Is Restricted aaa</label>
+                                        </div>
+                                        <p-multiSelect [options]="model.restrictedGroupList" [(ngModel)]="model.docSelectedRestrictedGroup" [overlayVisible]="true">
+                                        </p-multiSelect>
+                                    </div>-->
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Is Restricted</label>
+                                        </div>
+                                        <p-multiSelect [options]="model.restrictedGroupList" [(ngModel)]="model.docSelectedRestrictedGroup" [overlayVisible]="true">
+                                        </p-multiSelect>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- for search section -->
+                            <div class="row marginT10" *ngIf="!isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Uploaded By</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" [(ngModel)]="model.uploadby">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.upLoadedByList" [value]="item.value">{{item.label}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Period" class="dgrey">Upload Period</label>
+                                            <!--<input type="text" placeholder="05/13/2017 - 06/13/2017" class="form-control">-->
+                                            <my-date-range-picker id="mydateperiod" name="myuploadperiod" [options]="myDateRangePickerOptions"
+                                                                  [(ngModel)]="model.uploadPeriod" required (dateSelected)="onDateSelected($event)"  (dateRangeChanged)="onDateRangeChanged($event,'myuploadperiod')"></my-date-range-picker>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-12">
+                                        <div class="formMainTxtWithIconBox marginTMob10">
+                                            <label for="Period" class="dgrey">Publication Period</label>
+                                            <!--<input type="text" placeholder="05/13/2017 - 06/13/2017" class="form-control">-->
+                                            <my-date-range-picker id="mydateperiod" name="mypublicationperiod" [options]="myDateRangePickerOptions"
+                                                                  [(ngModel)]="model.publicationPeriod" required (dateSelected)="onDateSelected($event)" (dateRangeChanged)="onDateRangeChanged($event,'mypublicationperiod')"></my-date-range-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- for upload doc section -->
+                            <div class="row marginT10" *ngIf="isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <label for="Tags" class="dgrey">Keywords<span class="mandatory"> *</span> </label>
+                                            <input type="text" class="form-control" [(ngModel)]="model.tags" placeholder="Corn, Production, Bayer, Ukraine" (keypress)="onKeypress($event, 100)" (change)="onChangeTags($event, 100)">
+                                            <span class="lgrey size11">Use comma (,) for multiple tags</span>
+                                            <span class="red">{{tagMsg}}</span>
+                                    </div>
+                                    <!--<div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="formMainTxtWithIconBox">
+                                            <label for="Module" class="dgrey">Document Type<span class="mandatory"> *</span></label>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" [(ngModel)]="model.docSelectedType">
+                                                <option value="0" selected>Select</option>
+                                                <option *ngFor="let item of model.docTypeList" [value]="item.value">{{item.label}}</option>
+                                            </select>
+                                            <span class="red">{{docTypeMsg}}</span>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-md-3 col-sm-3 col-xs-12">                                        
+                                            <label for="Publication" class="dgrey">Publication Date<span class="mandatory"> *</span></label>
+                                            <!--<input type="text" placeholder="7/10/2017" class="form-control">-->
+                                            <my-date-picker id="mydate" name="mydate" [options]="myDatePickerOptions"
+                                                            [(ngModel)]="model.uploadPublicationDate" required></my-date-picker>
+                                            <span class="red">{{publicationDateeMsg}}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <!-- for upload doc section -->
+                            <div class="row marginT10" *ngIf="isKmUploadDoc">
+                                <div class="col-md-12 col-xs-12 padding0">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 marginB20">
+                                        <label for="upload" class="dgrey">Upload<span class="mandatory"> *</span></label>
+                                        <!--<div class="file-upload">
+                                            <div class="file-select">
+                                                <div class="file-select-button" id="fileName">Browse</div>
+                                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                                <input type="file" name="chooseFile" id="chooseFile">
+                                            </div>
+                                        </div>-->
+
+                                        <p-fileUpload (onSelect)="onSelect($event)"
+                                                      chooseLabel="Browse"
+                                                      multiple="multiple"
+                                                      showUploadButton="false"
+                                                      showCancelButton="false"
+                                                      (onClear)="onClear($event)">
+                                            <ng-template pTemplate="content">
+                                                <div *ngIf="uploadedFiles">
+                                                    <div class="ui-fileupload-row" *ngFor="let file of uploadedFiles; let i = index;">
+                                                        <div>{{file.name}} - {{ formatSize(file.size) }} </div>
+                                                        <div><button type="button" icon="fa-close" pButton (click)="onRemove($event,i)"></button></div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                        <span class="red">{{uploadFileMsg}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p *ngIf="!isKmUploadDoc" class="red col-md-12 col-sm-12 col-xs-12">
+                                    <span *ngIf="isValidPage == 0">Select at least one parameter to apply search</span>
+                                </p>
+                                <!-- for search section -->
+                                <div *ngIf="!isKmUploadDoc" class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                    <a href="javascript:void(0)" class="btn marginB10 marginL10" id="reset_btn" (click)="onReset()"> Reset</a>
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="submit_btn" (click)="onSearch()"> Search</a>
+                                </div>
+
+                                <p *ngIf="isKmUploadDoc" class="red col-md-4 padding0">
+                                    <span *ngIf="successMsg">{{successMsg}}</span>
+                                </p>
+                                <!-- for upload doc section -->
+                                <div *ngIf="isKmUploadDoc" class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                    <a href="javascript:void(0)" class="btn marginB10 marginL10" id="reset_btn" (click)="onReset()"> Reset</a>
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="save_btn" (click)="onSave()"> Submit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-growl life="5000" [(value)]="msgs"></p-growl>
+
+

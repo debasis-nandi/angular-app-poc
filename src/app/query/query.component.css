@@ -1,0 +1,38 @@
+﻿
+#saveQuery .container
+{
+    width:100% !important;
+}
+#saveQuery section {
+    display:none;
+}
+
+.modal-body {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+.ui-widget-header {
+    background:#fff !important;
+    padding:8px !important;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color:#337ab7 !important;
+}
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-pages, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-current {
+    padding:6px 11px !important;
+    margin:0 !important;
+    margin-left:-1px !important;
+}
+.ui-paginator .ui-paginator-pages {
+    padding:0 !important;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background-color:#eee !important;    
+    border:1px solid #ddd !important;
+}
+.ui-corner-all {
+    border-radius:0 !important;
+}
+.ui-paginator-rpp-options {
+    padding:6px !important;
+}

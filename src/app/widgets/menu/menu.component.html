@@ -1,0 +1,116 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<!-- Menu for desktop -->
+<div id="myMenuH" class="navbar navbar-default navbar-static-top animated fadeInDown hidden-xs affix-top" data-spy="affix" data-offset-top="73" (window:scroll)="onScroll($event)">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse btnCollapse">
+                <ul class="nav navbar-nav navbar-right" *ngIf="menuItems">
+                    <li routerLinkActive="active" *ngFor="let item of menuItems">
+                        
+                        <a *ngIf="item.Children.length == 0 && item.Url != ''" [routerLink]="item.Url">{{item.Name}}</a>
+                        <a *ngIf="item.Children.length == 0 && item.Url == ''" href="javascript:void(0)">{{item.Name}}</a>
+                        <a *ngIf="item.Children.length > 0 && item.Url != ''" [routerLink]="item.Url" class="dropdown-toggle" data-toggle="dropdown">{{item.Name}}<b class="caret"></b></a>
+                        <a *ngIf="item.Children.length > 0 && item.Url == ''" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{item.Name}}<b class="caret"></b></a>
+
+                        <ul *ngIf="item.Children.length > 0" class="dropdown-menu">
+                            <li routerLinkActive="active" *ngFor="let itemChild of item.Children" [ngClass]="{'dropdown-submenu': itemChild.Children.length > 0 }">
+                                <a *ngIf="itemChild.Children.length == 0 && itemChild.Url == 'adminguide'" href="javascript:void(0)" (click)="downloadAdminGuide()">{{itemChild.Name}}</a>
+                                <a *ngIf="itemChild.Children.length == 0 && itemChild.Url != '' && itemChild.Url != 'adminguide'" [routerLink]="itemChild.Url">{{itemChild.Name}}</a>
+                                <a *ngIf="itemChild.Children.length == 0 && itemChild.Url == ''" href="javascript:void(0)">{{itemChild.Name}}</a>
+                                <a *ngIf="itemChild.Children.length > 0 && itemChild.Url != ''" [routerLink]="itemChild.Url" class="dropdown-toggle" data-toggle="dropdown">{{itemChild.Name}}</a>
+                                <a *ngIf="itemChild.Children.length > 0 && itemChild.Url == ''" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{itemChild.Name}}</a>
+
+                                <ul *ngIf="itemChild.Children.length > 0" class="dropdown-menu">
+                                    <li routerLinkActive="active" *ngFor="let itemChildChild of itemChild.Children" [ngClass]="{'dropdown-submenu': itemChildChild.Children.length > 0 }">
+                                        <a *ngIf="itemChildChild.Children.length == 0 && itemChildChild.Url != ''" [routerLink]="itemChildChild.Url">{{itemChildChild.Name}}</a>
+                                        <a *ngIf="itemChildChild.Children.length == 0 && itemChildChild.Url == ''" href="javascript:void(0)">{{itemChildChild.Name}}</a>
+                                        <a *ngIf="itemChildChild.Children.length > 0 && itemChildChild.Url != ''" [routerLink]="itemChildChild.Url" class="dropdown-toggle" data-toggle="dropdown">{{itemChildChild.Name}}</a>
+                                        <a *ngIf="itemChildChild.Children.length > 0 && itemChildChild.Url == ''" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{itemChildChild.Name}}</a>
+
+                                        <ul *ngIf="itemChildChild.Children.length > 0" class="dropdown-menu">
+                                            <li routerLinkActive="active" *ngFor="let itemChildChildChild of itemChildChild.Children">
+                                                <a *ngIf="itemChildChildChild.Url != ''" [routerLink]="itemChildChildChild.Url">{{itemChildChildChild.Name}}</a>
+                                                <a *ngIf="itemChildChildChild.Url == ''" href="javascript:void(0)">{{itemChildChildChild.Name}}</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- end container-fluid -->
+ </div>
+
+<!-- Menu for small device -->
+<!--<div id="wrapper" [ngClass]="{'hidden-md hidden-sm hidden-lg visible-xs toggled': isToogle, 'hidden-md hidden-sm hidden-lg visible-xs': !isToogle}">-->
+<div id="wrapper" [ngClass]="cssToggled">
+    <div class="overlay" [ngStyle]="styles"></div>
+    <!-- Sidebar -->
+    <nav class="navbar" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav" *ngIf="menuItems">
+            <li class="sidebar-brand" style="height:50px;">
+                <div class="col-xs-12 padding0">
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name dgrey"> {{userName}} <span class="size12 lgrey">{{userRole}} </span></div>
+                    </div>
+                </div>
+            </li>
+
+            <li *ngFor="let item of menuItems">
+                <a *ngIf="item.Children.length == 0 && item.Url != ''" [routerLink]="item.Url" class="bold">{{item.Name}}</a>
+                <a *ngIf="item.Children.length == 0 && item.Url == ''" href="javascript:void(0)" class="bold">{{item.Name}}</a>
+                <a *ngIf="item.Children.length > 0 && item.Url != ''" [routerLink]="item.Url" class="dropdown-toggle bold" data-toggle="dropdown">{{item.Name}}<b class="caret"></b></a>
+                <a *ngIf="item.Children.length > 0 && item.Url == ''" href="javascript:void(0)" class="dropdown-toggle bold" data-toggle="dropdown">{{item.Name}}<b class="caret"></b></a>
+
+                <ul *ngIf="item.Children.length > 0" class="dropdown-menu">
+                    <li *ngFor="let itemChild of item.Children">
+                        <a *ngIf="itemChild.Children.length == 0 && itemChild.Url != ''" [routerLink]="itemChild.Url">{{itemChild.Name}}</a>
+                        <a *ngIf="itemChild.Children.length == 0 && itemChild.Url == ''" href="javascript:void(0)">{{itemChild.Name}}</a>
+                        <a *ngIf="itemChild.Children.length > 0 && itemChild.Url != ''" [routerLink]="itemChild.Url">{{itemChild.Name}}</a>
+                        <a *ngIf="itemChild.Children.length > 0 && itemChild.Url == ''" href="javascript:void(0)">{{itemChild.Name}}</a>
+
+                        <ul *ngIf="itemChild.Children.length > 0">
+                            <li *ngFor="let itemChildChild of itemChild.Children">
+                                <a *ngIf="itemChildChild.Children.length == 0 && itemChildChild.Url != ''" [routerLink]="itemChildChild.Url" class="dgrey">{{itemChildChild.Name}}</a>
+                                <a *ngIf="itemChildChild.Children.length == 0 && itemChildChild.Url == ''" href="javascript:void(0)" class="dgrey">{{itemChildChild.Name}}</a>
+                                <a *ngIf="itemChildChild.Children.length > 0 && itemChildChild.Url != ''" [routerLink]="itemChildChild.Url" class="dgrey">{{itemChildChild.Name}}</a>
+                                <a *ngIf="itemChildChild.Children.length > 0 && itemChildChild.Url == ''" href="javascript:void(0)" class="dgrey">{{itemChildChild.Name}}</a>
+
+                                <ul *ngIf="itemChildChild.Children.length > 0">
+                                    <li *ngFor="let itemChildChildChild of itemChildChild.Children">
+                                        <a *ngIf="itemChildChildChild.Url != ''" [routerLink]="itemChildChildChild.Url" class="dgrey">{{itemChildChildChild.Name}}</a>
+                                        <a *ngIf="itemChildChildChild.Url == ''" href="javascript:void(0)" class="dgrey">{{itemChildChildChild.Name}}</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+            </li>
+
+            <li> <a href="javascript:void(0)" (click)="onLogout()" class="bold">LOGOUT</a> </li>
+
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <button type="button" id="btnToogle" (click)="toogleClass($event)" [ngClass]="isOpenClose" data-toggle="offcanvas"> <span class="hamb-top"></span> <span class="hamb-middle"></span> <span class="hamb-bottom"></span> </button>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>

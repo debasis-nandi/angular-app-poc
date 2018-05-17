@@ -1,0 +1,119 @@
+﻿
+<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div *ngIf="tabularViewModel">
+    <section class="paddingMob10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-9 col-xs-9 padding0">User Analytics</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="content" class="paddingMob10">
+
+        <div class="container paddingL10R10">
+
+            <div class="row border-top5">
+                <div class="blue-boxes innerTop">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12 padding0">
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="fromdate">From Date<span class="mandatory"> *</span></label>
+                                        <my-date-picker id="mydate" name="fromdate" [options]="myDateRangePickerOptions"
+                                                        [(ngModel)]="fromDate" required></my-date-picker>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="todate">To Date<span class="mandatory"> *</span></label>
+                                        <my-date-picker id="mydate" name="todate" [options]="myDateRangePickerOptions"
+                                                        [(ngModel)]="toDate" required></my-date-picker>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="Region">Region<span class="mandatory"> *</span></label>
+                                        <select class="form-control" (change)="onDropdownChange($event)">
+                                            <option *ngFor="let dd of tabularViewModel.kpiSourceData" value={{dd.labelId}} [selected]="dd.labelId==regionId">
+                                                {{dd.label}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12 marginT30">
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="save_btn" (click)="onSave()"> Submit</a>
+                                    <!--<a href="javascript:void(0)" class="btn marginB10 marginL10" id="reset_btn" (click)="onReset()"> Reset</a>-->
+                                </div>
+                            </div>
+                            <span class="red marginL20">{{publicationDateeMsg}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="white-boxes padding8LR">
+                        <div class="table-responsive marginT10">
+                            <!--<table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Modules
+                                        </th>
+                                        <th>
+                                            Pages
+                                        </th>
+                                        <th>
+                                            Unique Users
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let module of userAnalyticsData">
+                                        <td>
+                                            {{module.ModuleName}}
+                                        </td>
+                                        <td>
+                                            <ul style="list-style: none;" *ngFor="let page of module.Pages;let isLast=last;">
+                                                <li>
+                                                    {{page}}
+                                                    <hr *ngIf="!isLast" />
+                                                </li>
+
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul style="list-style: none;" *ngFor="let count of module.UniqueUsers;let isLast=last;">
+                                                <li>
+                                                    {{count}}
+                                                    <hr *ngIf="!isLast" />
+                                                </li>
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>-->
+                            <underlying-table [tableHeader]="tabularViewModel.tableHead"
+                                              [tableData]="tabularViewModel.kpiData"
+                                              [paginator]="paginator"
+                                              [pageLinks]="pageLinks"
+                                              [rowsPerPage]="rowsPerPage"
+                                              [rowsPerPageOptions]="rowsPerPageOptions"
+                                              [responsive]="responsive"
+                                              [scrollable]="scrollable">
+                            </underlying-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

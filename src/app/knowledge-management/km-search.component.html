@@ -1,0 +1,40 @@
+﻿
+<my-loader [loading]="loading"></my-loader>
+<section class="paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-11 col-xs-10 padding0">Knowledge Management</h1>
+
+                <div class="inner-tabs">
+                    <ul class="list-inline">
+                        <li><a [routerLink]="['/layout/recentdocs/']">Recent Documents</a></li>
+                        <li>|</li>
+                        <li class="active"><a [routerLink]="['/layout/kmsearch/']">Search</a></li>
+                        <li *ngIf="isAdmin">|</li>
+                        <li *ngIf="isAdmin"><a [routerLink]="['/layout/kmupload/']">Upload Documents</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<my-km-search-upload [isKmUploadDoc]="false" (selectedValueEmit)='onSearchEmit($event)'>
+</my-km-search-upload>
+
+<section id="content" class="paddingMob10" *ngIf="searchItems">
+    <div class="container">
+        <div class="row marginB5" *ngIf="searchItems.length > 0">
+            <!--<p class="marginB0 paddingT10 col-md-10 ">
+                <span class="green2 boldF size22 marginL10">Search Results for : </span> <strong></strong>
+            </p>-->
+            <span class="size11 pull-right marginT20 marginR10"><i class="fa fa-file-text orange marginR5 size16 "></i>Restricted documents</span>
+        </div>
+    </div>
+</section>
+<my-search-template [isKMSearchComponent]="true" [KMRequest]="KMRequest" [searchItems]="searchItems" [searchResultFor]="searchResultFor" [pageSize]="pageSize">
+</my-search-template>
+
+
+

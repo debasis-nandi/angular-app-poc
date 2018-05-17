@@ -1,0 +1,56 @@
+﻿<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12 home-calendar">
+            <div class="col-md-7 paddingL0">
+                <div *ngIf="!show" class="events">
+                    <h1><i class="fa fa-calendar"></i> EVENT CALENDAR (DD-MM-YYYY)<div *ngIf="IsAdministrator" class="pull-right"><a href="javaScript:void(0)" (click)="onClickEvents(0)" class="fa fa-plus-square size14"></a></div></h1>
+                    <div *ngIf="TodayEvent">
+                        <div class="bold marginB5">{{TodayTitle}}</div>
+
+                        <div class="today-event">
+                            <div *ngIf="TodayEvent.length== 0">
+                                <span class="no-data-small size13">
+                                    No events found.
+                                </span>
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of TodayEvent; let i = index;">
+                                    <div *ngIf="IsAdministrator" class="pull-right">
+                                        <a href="javascript:void(0)" (click)="onClickEvents(item.id)"><i class="fa fa-pencil size22 blue paddingR5"></i></a>
+                                        <a href="javascript:void(0)" (click)="onClickEventsDelete(item.id)"><i class="fa fa-trash-o size22 blue" aria-hidden="true"></i></a>
+                                    </div>
+                                    {{item.title}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bold marginB5">{{UpcomingTitle}}</div>
+                        <div class="today-event">
+                            <div *ngIf="UpcomingEvent.length== 0">
+                                <span class="no-data-small size13">
+                                    No events found.
+                                </span>
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of UpcomingEvent; let i = index;">
+                                    <div *ngIf="IsAdministrator" class="pull-right">
+                                        <a href="javascript:void(0)" (click)="onClickEvents(item.id)"><i class="fa fa-pencil size22 blue paddingR5"></i></a>
+                                        <a href="javascript:void(0)" (click)="onClickEventsDelete(item.id)"><i class="fa fa-trash-o size22 blue" aria-hidden="true"></i></a>
+                                    </div>
+                                    {{item.start  | date: 'dd-MM-yy'}}: {{item.title}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="calendar" class="col-md-5 calendar-control">
+                <p-schedule [events]="events" [aspectRatio]="aspectRatio" [eventLimit]="eventLimit" [fixedWeekCount]="false" [contentHeight]="contentHeight"
+                            (onDayClick)="ngOnDayClick($event)" (viewRender)="ngOnViewRender($event)" [header]="header" [locale]="en"></p-schedule>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="queryData && show">
+        <event-modal [queryData]="queryData" [modalclasses]="userProfileModalClasses" (eventClose)="onClose()" (eventSave)="OnSaveEvent(queryData)"></event-modal>
+    </div>
+
+</div>

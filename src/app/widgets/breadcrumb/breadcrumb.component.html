@@ -1,0 +1,10 @@
+﻿
+<div class="container-fluid hidden-xs" *ngIf="breadcrumbs.length > 0">
+    <ol class="breadcrumb">
+        <li *ngFor="let breadcrumb of breadcrumbs; let i = index">
+            <span *ngIf="i != breadcrumbs.length-1 && breadcrumb.url == ''">{{ breadcrumb.label }}</span>
+            <a *ngIf="i != breadcrumbs.length-1 && breadcrumb.url != ''" [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+            <span *ngIf="i == breadcrumbs.length-1" class="active">{{ breadcrumb.label }}</span>
+        </li>
+    </ol>
+</div>

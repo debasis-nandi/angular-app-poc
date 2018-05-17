@@ -1,0 +1,100 @@
+﻿<!--<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 padding8LR">
+            <div class="row">
+                <h2 class="col-md-12 paddingB0 marginB0 marginT0 marginL25">Update Gallery<span class="lgrey size11 pull-right paddingT15 marginR25">All * marked fields are mandatory </span></h2>-->
+<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div class="col-md-12 col-xs-12 padding0"  *ngIf="isAdd">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 padding0">
+            <div class="blue-boxes animated fadeInDown innerTop borderT2blue">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 padding0">
+                            <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label for="usr">Term</label><span class="mandatory"> *</span>
+                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="formData.term" autofocus>
+                                    <div class="red size12">
+                                        <span>{{errorTermMsg}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 padding0">
+                            <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                <div class="form-group">
+                                    <label for="usr">Definition</label><span class="mandatory"> *</span>
+                                    <!--<input type="text" class="form-control" [(ngModel)]="model.title" placeholder="Document title will be here" (keypress)="onKeypress($event, 100)" (change)="onChangeTitle($event, 100)">-->
+                                    <div id="glossaryDefinition" (focus)="settingTinymce()" (click)="settingTinymce()" class="glossarydescription size14" [innerHtml]="editData?.definition">
+                                        <!--{{settingTinymce()}}-->
+                                    </div>
+                                    <!--<div class="red size12">
+                                        <span>{{errorDefMsg}}</span>
+                                    </div>-->
+                                    <div class="size12">
+                                        <span [ngClass]="statusClass">{{errorDefMsg}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9 col-xs-12 ">
+                            <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                <a href="javascript:void(0)" class="btn marginB10 " id="save_btn" (click)="onAdd()"> Add</a>
+                                <!--<a href="javascript:void(0)" class="btn marginB10 marginL10" id="reset_btn" (click)="onCancel()"> Cancel</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+        <div class="col-md-12 col-xs-12 " *ngIf="!isAdd">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <div class="form-group">
+                            <label for="usr">Term</label><span class="mandatory"> *</span>
+                            <input type="text" class="form-control" placeholder="" [(ngModel)]="formData.term" autofocus>
+                            <div class="red size12">
+                                <span>{{errorTermMsg}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="col-md-9 col-sm-9 col-xs-12 ">
+                        <div class="form-group">
+                            <label for="usr">Definition</label><span class="mandatory"> *</span>
+                            <div id="glossaryDefinition" (click)="settingTinymce()" class="glossarydescription size14" [innerHtml]="editData?.definition">
+                                <!--{{settingTinymce()}}-->
+                            </div>                            
+                            <div class="size12">
+                                <span [ngClass]="statusClass">{{errorDefMsg}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-9 col-xs-12 ">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                        <a href="javascript:void(0)" class="btn marginB10 " id="update_btn" (click)="onAdd()"> Update</a>
+                        <!--<a href="javascript:void(0)" class="btn marginB10 " id="cancel_btn" (click)="onUpdateCancel()"> Cancel</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--</div>
+                </div>
+            </div>
+        </div>-->

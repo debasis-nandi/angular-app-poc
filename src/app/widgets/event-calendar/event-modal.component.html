@@ -1,0 +1,42 @@
+﻿<!--<app-modal [modalclasses]="modalclasses">
+    <div class="app-modal-header">
+        <button type="button" class="close" (click)="onClose()">&times;</button>
+        <h4 class="modal-title blue">Title</h4>
+    </div>
+    <div class="app-modal-body">
+        <div class="container">-->
+<div class="row">
+    <div class="pull-right"><button type="button" class="close" (click)="onClose()">&times;</button></div>
+    <div class="col-md-12 col-xs-12">
+        <div class="form-group">
+            <label for="Publication">Event Date*</label>
+            <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                            [(ngModel)]="queryData.start" required></my-date-picker>
+
+
+        </div>
+        <!--<div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="form-group">
+                <label for="Publication">End Date*</label>
+                <my-date-picker name="todate" [options]="myDatePickerOptions"
+                                [(ngModel)]="queryData.end" required></my-date-picker>
+
+            </div>
+        </div>-->
+
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <div class="form-group">
+            <label for="Publication">Title*</label>
+            <input type="text" class="form-control" maxlength="35" placeholder="Enter Title" [(ngModel)]="queryData.title" required>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <a href="javascript:void(0)" class="btn marginB10 " id="save_btn" (click)="onSave()"> Save</a>
+    </div>
+</div>
+<span class="red marginL20">{{publicationDateeMsg}}</span>
+
+<!--</div>
+    </div>
+</app-modal>-->

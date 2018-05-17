@@ -1,0 +1,223 @@
+﻿{
+  "elasticResponseData": [
+    {
+      "type": "competitorlandscape",
+      "templateType": "chart",
+      "typeName": "Competitor Landscape",
+      "count": 14,
+      "data": [
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 17,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "Adama"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 29,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "UPL"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 16,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "Dupont"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 29,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "UPL"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 28,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "BASF"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 28,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "BASF"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 2,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "Monsanto"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 16,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "Dupont"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 2,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "Monsanto"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 4,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "Bayer"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 4,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "Bayer"
+        },
+        {
+          "Id": 0,
+          "ChartId": 1,
+          "PageId": 1,
+          "CompetitorId": 18,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CiFinancials",
+          "CompetitorName": "Kisaan"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 17,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "Adama"
+        },
+        {
+          "Id": 0,
+          "ChartId": 40,
+          "PageId": 8,
+          "CompetitorId": 18,
+          "ChartName": "Total Agribusiness Sales",
+          "PageName": "CompetitorComparison",
+          "CompetitorName": "Kisaan"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "templateType": "other",
+      "typeName": "News",
+      "count": 1,
+      "data": [
+        {
+          "Id": 0,
+          "Title": "Monsanto completes expansion of Iowa plant, supporting the launch of dicamba-tolerant trait technologies",
+          "Description": "Monsanto and 2Blades foundation formed a collaboration to discover novel sources of genetic resistance to devastating corn diseases\r\n2Blades will deliver these resistance genes in collaboration with The Sainsbury Laboratory (Norwich, UK), the leading global institute for Total research on plant-pathogen...",
+          "SourceName": "Company Website",
+          "SourceLink": "https://app.moqups.com/apphelpdesk/89WRuNxjL7/view/page/a13af917e",
+          "NewsType": "Commercial Moves",
+          "NewsSubType": "New Sites"
+        }
+      ]
+    },
+    {
+      "type": "knowledgemanagement",
+      "templateType": "other",
+      "typeName": "Knowledge Management",
+      "count": 4,
+      "data": [
+        {
+          "Id": 7,
+          "Title": "Test Title",
+          "Description": "TestDescription",
+          "Tags": "TestTags",
+          "DocType": "Type2",
+          "DocRestrictedGroup": [ "Group1" ],
+          "PublicationDate": "2017-08-29T13:00:00",
+          "Uploadby": "Nishu Goyal",
+          "AttachmentOriginalName": "test5.docx",
+          "AttachmentUniqueName": "7765-333-3434-3434 - Copy.docx",
+          "DocModules": [ "Macroeconomics" ],
+          "DocRegions": [ "LATAM, Africa and Middle East" ],
+          "DocCountries": [ "Canada" ]
+        },
+        {
+          "Id": 15,
+          "Title": "TestTitle16",
+          "Description": "TestDescription1",
+          "Tags": "TestTag",
+          "DocType": "Type2",
+          "DocRestrictedGroup": [ "Group2" ],
+          "PublicationDate": "2017-08-29T13:00:00",
+          "Uploadby": "Nishu Goyal",
+          "AttachmentOriginalName": "test13.docx",
+          "AttachmentUniqueName": "7765-333-3434-3434 - Copy (3).docx",
+          "DocModules": [ "Macroeconomics" ],
+          "DocRegions": [ "LATAM, Africa and Middle East" ],
+          "DocCountries": [ "Canada" ]
+        },
+        {
+          "Id": 3,
+          "Title": "TestTitlesaa",
+          "Description": "TestDescription34",
+          "Tags": "TestTag,TestTag1",
+          "DocType": "Type1",
+          "DocRestrictedGroup": [ "Group1" ],
+          "PublicationDate": "2017-08-29T00:00:00",
+          "Uploadby": "Nishu Goyal",
+          "AttachmentOriginalName": "test2.docx",
+          "AttachmentUniqueName": "7765-333-3434-3434.docx",
+          "DocModules": [ "Crop Economics", "Macroeconomics" ],
+          "DocRegions": [ "Europe", "North America" ],
+          "DocCountries": [ "US" ]
+        },
+        {
+          "Id": 11,
+          "Title": "Test Title",
+          "Description": "TestDescription",
+          "Tags": "TestTags",
+          "DocType": "Type2",
+          "DocRestrictedGroup": [ "Group3" ],
+          "PublicationDate": "2017-08-29T13:00:00",
+          "Uploadby": "Nishu Goyal",
+          "AttachmentOriginalName": "test9.docx",
+          "AttachmentUniqueName": "7765-333-3434-3434 - Copy (2).docx",
+          "DocModules": [ "Macroeconomics" ],
+          "DocRegions": [ "LATAM, Africa and Middle East" ],
+          "DocCountries": [ "Canada" ]
+        }
+      ]
+    }
+  ]
+}

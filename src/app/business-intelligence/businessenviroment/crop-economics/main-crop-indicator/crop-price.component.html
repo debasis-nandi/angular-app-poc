@@ -1,0 +1,219 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div class="min200">
+    <div *ngIf="data">
+        <section class="paddingMob10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding8LR">
+                        <h1 class="col-md-9 col-xs-9 padding0">Crop Indicator - {{cropType}}</h1>
+                        <div class="col-md-3 col-sm-3 col-xs-12 text-right paddingT20 paddingMob0">
+
+                            <div *ngFor="let action of data.actions">
+                                <!--<div *ngIf="(action.actionName|lowercase) ==='filter'" class="posIcon">
+                                    <my-action id="filter" [actionObject]="action">
+                                    </my-action>
+                                    <div class="toggleFilter" style="display: none;">
+                                        <div class="filterBox1 filterBoxBig animated fadeInDown text-left">
+                                            <my-filter *ngIf="data.filters" [filtersList]="data.filters" (selectedValueEmit)='onFilterEmit($event)' (submitVisible)="onSubmitEmit($event)" (submitMessage)="onSubmitMessageEmit($event)"> </my-filter>
+                                            <div class="red col-md-3 padding0">{{submitMessage}}</div>
+                                            <div class="red col-md-12 padding0">
+                                                <button id="filterSubmit" class="btn marginB10" (click)="FilterSubmit(pagePopover)" [disabled]="submitVisible">Submit</button>
+                                                <button class="btn marginB10" (click)="Reset(pagePopover)">Reset</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                                    <my-action id="export" [actionObject]="action">
+                                    </my-action>
+                                    <div class="toggleExport" style="display: none;">
+                                        <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                            <my-export [exportsList]="data.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                            <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div *ngIf="(action.actionName|lowercase) !=='filter' && (action.actionName|lowercase) !=='export'">
+                                    <my-action [actionObject]="action">
+                                    </my-action>
+                                </div>
+                            </div>
+                        </div>
+                        <my-crop-menu></my-crop-menu>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding8LR">
+
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default" id="panelFilter">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a id="CPFilter" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter" class="collapsed">Filters</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFilter" class="panel-collapse collapse" role="tabpanel">
+                                    <div class="panel-body">
+                                        <div class="blue-boxes-new animated fadeInDown innerTop">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-xs-12 paddingT15 ">
+
+                                                        <my-filter *ngIf="data.filters" [filtersList]="data.filters" [filtersRelationList]="data.filtersRelation" [monthlyTypeHtml]="'price'" (selectedValueEmit)='onFilterEmit($event)' (submitVisible)="onSubmitEmit($event)" (submitMessage)="onSubmitMessageEmit($event)"> </my-filter>
+                                                        <div class="red col-md-3 padding0">{{submitMessage}}</div>
+                                                        <div class="red col-md-12 padding0">
+                                                            <button class="btn marginB5" (click)="Reset(pagePopover)">Reset</button>
+                                                            <button id="filterSubmit" class="btn marginB5" (click)="FilterSubmit(pagePopover)" [disabled]="submitVisible||submitMessage.length>0">Submit</button>
+                                                            
+                                                        </div>
+                                                        <div class="col-md-3 padding0 size11 marginB10">Maximum 12 months can be selected.</div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="graphs" class="paddingMob10">
+            <div class="container">
+                <div class="row padding8LR">
+                    <div *ngIf="selectedFilters?.length>0" class="col-md-12 col-sm-12 col-xs-12 selected-filter marginB20 ">
+                        <div class="size13 bold">Filters applied</div>
+                        <ul>
+                            <li *ngFor="let filter of selectedFilters"><strong>{{filter.filterName}}:</strong> {{filter.selectedValues}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="graph-boxes floatNone text-center width99" *ngIf="data.widgets== null || data.widgets.length== 0">
+                        <span class="no-data">
+                            {{noDataMessage}}
+                        </span>
+                    </div>
+                    <div *ngIf="data.widgets.length!=0">
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding0" id="firstselection" *ngFor="let obj of data.widgets; let i = index">
+
+                            <div class="graph-boxes floatNone width99">
+                                <h2>{{obj?.widgetName}} </h2>
+                                <div class="col-md-3 col-sm-3 col-xs-3 pull-right padding0">
+                                    <div *ngFor="let action of obj?.widgetActionViewModelList">
+                                        <div *ngIf="(action.actionName|lowercase) ==='filter'" class="posIcon">
+                                            <my-action id="filter" class="widgetfilter" [actionObject]="action">
+                                            </my-action>
+                                            <div class="toggleWidgetFilter" style="display: none;">
+                                                <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                    <my-filter [filtersList]="obj.widgetFilters" (selectedValueEmit)='onFilterEmit($event)'> </my-filter>
+                                                    <button id="filterSubmit" class="btn marginB10" (click)="FilterSubmit(pagePopover)">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(action.actionName|lowercase) ==='content sharing'" class="posIcon">
+                                            <my-action id="content{{i}}" class="sharecontent" [actionObject]="action">
+                                            </my-action>
+                                            <div class="toggleContentShare" style="display: none;">
+                                                <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                    <!--<my-email [ChartID]="obj.widgetId" [ChartName]="obj.widgetName" DataType="Chart"></my-email>-->
+                                                    <my-email [ChartObject]="obj"  [selectedFilters]="selectedFilters" [CompetitorName]="obj.pageNameToShow + '-' + cropType" DataType="Chart"></my-email>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(action.actionName|lowercase) =='favourite'" class="posIcon">
+                                            <my-action [actionObject]="action" [favouriteObject]="obj" [PageName]="pageName">
+
+                                            </my-action>
+                                            <!--<my-favourites [ChartID]="obj.widgetId" [ChartName]="obj.widgetName" DataType="Chart" [PageName]="Page.ciFinancialsRatio.toString()" (click)="onFavouriteClick()"></my-favourites>-->
+                                        </div>
+
+                                        <div *ngIf="(action.actionName|lowercase) !=='filter' && (action.actionName|lowercase) !=='content sharing' && (action.actionName|lowercase) !=='favourite'">
+                                            <my-action [actionObject]="action">
+                                            </my-action>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="exTab2">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"> <a href="#{{i}}c" (click)="showFlexi=true" data-toggle="tab">Chart</a> </li>
+                                        <li><a href="#{{i}}u" (click)="showFlexi=false" data-toggle="tab">Underlying Data</a> </li>
+                                    </ul>
+                                    <div class="tab-content marginT20">
+                                        <div class="tab-pane active animated textcenter fadeInUp" id="{{i}}c">
+                                            <my-chart [chartId]="obj?.widgetId" [charts]="obj.chartComponentViewModel"></my-chart>
+                                        </div>
+                                        <div class="tab-pane animated fadeInUp" id="{{i}}u">
+
+                                            <underlying-table [tableHeader]="obj.underlyingChartDataViewModel?.tableHeaders"
+                                                              [tableData]="obj.underlyingChartDataViewModel?.tableRows"
+                                                              [paginator]="paginator"
+                                                              [pageLinks]="pageLinks"
+                                                              [rowsPerPage]="rowsPerPage"
+                                                              [rowsPerPageOptions]="rowsPerPageOptions"
+                                                              [responsive]="responsive">
+                                            </underlying-table>
+                                        </div>
+
+                                    </div>
+                                    <!--<div *ngIf="blankCrops">
+                                        <p style="text-align:center"><i>Data is not available for <b>{{blankCrops}}</b> against the selected filters</i></p>
+                                    </div>-->
+                                    <span class="pull-left lgrey size12">Last updated: {{obj.lastUpdated}}</span> 
+                                    <!--<span class="pull-right lgrey size12 sourcemob">Source: {{obj.sourceName}}</span>-->
+                                    <div class="clearfix"></div>
+                                    <!--<div class="col-md-12 col-xs-12 padding0 marginT20 borderTop floatNone" >
+                                        <p class="size16 bold dgrey paddingT15 col-md-11 col-xs-10 paddingL0"> Insight</p>
+                                        <div class="col-md-1 col-xs-2 paddingT15">
+                                            <a href="javascript:void(0)" title="Add/Edit insight" class="editviewBtn" *ngIf="isAdmin" (click)="editChartInsight($event, obj.widgetId, obj.insightData,i)">
+                                                <span class="fa fa-pencil-square-o fa-2x lblue"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 padding0">
+                                            <div class="viewText col-md-11 padding0 size12 animated fadeInUp">-->
+                                    <!--<my-rich-text [insightData]="obj.insightData" [widgetId]="obj.widgetId"></my-rich-text>-->
+                                    <!--<div *ngIf="!obj.insightData || obj.insightData == null || obj.insightData == ''">
+                                        <div id="richTextInsight{{i}}" class="glyphicon size11 marginR5 insightScrollDisplay width100 fontArial" [innerHtml]="noInsightText"></div>
+                                    </div>
+                                    <div *ngIf="obj.insightData && obj.insightData != null && obj.insightData != ''">
+                                        <div id="richTextInsight{{i}}" class="glyphicon size11 marginR5 insightScrollDisplay width100 fontArial" [innerHtml]="obj.insightData | SafeHtmls"></div>
+                                    </div>-->
+                                    <!--<p> <span class="glyphicon glyphicon-menu-right lgrey size11 marginR5"></span>This is a placeholder for Syngenta admin to add their analysis.</p>
+                                    <p> <span class="glyphicon glyphicon-menu-right lgrey size11 marginR5"></span>If there is no text here added here, the insight placeholder will not be visible. </p>-->
+                                    <!--</div>
+                                        </div>
+
+                                        <span *ngIf="obj.insightLastUpdated && obj.insightLastUpdated!='0001-01-01T00:00:00'" class="pull-left lgrey size12 marginT10">Insight Last Updated: {{obj.insightLastUpdated | date:'dd MMM yyyy'}}</span>
+                                        <span *ngIf="!obj.insightLastUpdated || obj.insightLastUpdated == '0001-01-01T00:00:00'" class="pull-left lgrey size12 marginT10">Insight Last Updated: {{noInsightDate}}</span>
+                                    </div>-->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 paddingT10 text-right"><a [routerLink]="['/layout/kmsearch',getPageModuleId()]">View Raw Data for Crop Economics</a></div>
+            </div>
+        </div>
+    </div>
+</div>

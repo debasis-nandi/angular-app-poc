@@ -1,0 +1,180 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<section class="padding0 paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-12 col-xs-12 padding0">My Subscription</h1>
+                <!--<h5 class="padding8LR">
+                    Specify module and related parameters to receive notifications
+                </h5>-->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 padding0">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 padding0">
+                            <div class="blue-boxes innerTop borderT2blue" *ngIf="filterData.modules">
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12 padding0 adduser">
+                                        <div class="col-md-3 col-sm-3 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="module">Module</label>
+                                                <select name="module" class="form-control Regional" (change)="isUpdate = false;onModuleChange($event.target.value)">
+                                                    <option *ngFor="let m of filterData.modules" value="{{m.labelId}}" [selected]="m.labelId==userSubscription.moduleId">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12 " *ngIf="userSubscription.moduleId==9">
+                                            <div class="form-group">
+                                                <label for="competitor">Competitor</label>
+                                                <select name="competitor" class="form-control Regional" [(ngModel)]="userSubscription.competitorId">
+                                                    <option *ngFor="let m of filterData.competitors" value="{{m.labelId}}">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12 " *ngIf="userSubscription.moduleId==4">
+                                            <div class="form-group">
+                                                <label for="crops">Crops</label>
+                                                <select name="crops" class="form-control Regional" [(ngModel)]="userSubscription.cropId">
+                                                    <option *ngFor="let m of filterData.crops" value="{{m.labelId}}">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row paddingT15" *ngIf="userSubscription.moduleId!=9">
+                                    <div class="col-md-12 col-xs-12 padding0">
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="region" class="normal"><strong>Region</strong></label>
+                                                <select name="region" class="form-control Region" (change)="onRegionChange($event.target.value)" [(ngModel)]="userSubscription.regionId">
+                                                    <option *ngFor="let m of filterData.regions" value="{{m.labelId}}">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="userSubscription.moduleId!=15 && userSubscription.moduleId!=13 && userSubscription.moduleId!=6" class="col-md-3 col-sm-3 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="territory" class="normal"><strong>Territory</strong></label>
+                                                <select name="territory" class="form-control Territory" [(ngModel)]="userSubscription.territoryId" (change)="onTerritoryChange($event.target.value)">
+                                                    <option *ngFor="let m of filterData.territories" value="{{m.labelId}}">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="country" class="normal"><strong>Country</strong></label>
+                                                <select name="country" class="form-control Country" [(ngModel)]="userSubscription.countryId" (change)="onCountryChange($event.target.value)">
+                                                    <option *ngFor="let m of filterData.countries" value="{{m.labelId}}">{{m.label}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row paddingT15">
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" [(ngModel)]="userSubscription.emailNotification">
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> Receive Notification By Email
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="statusDesc && statusDesc != ''">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding0">
+                                        <span [ngClass]="statusClass" class="marginL20">{{statusDesc}}</span>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT10">
+                                            <a href="javascript:void(0)" class="btn marginB10 marginL20" (click)="SaveSubscription(true)"> {{isUpdate?'Update':'Save'}}</a>
+                                            <!--<a href="javascript:void(0)" class="btn marginB10 marginL10" (click)="ResetSubscription()"> Cancel</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding0">
+
+
+                        <div class="white-boxes">
+                            <div class="table-responsive" id="manageuser">
+                                <table class="table table-hover comp-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Modules</th>
+                                            <th>Notification For</th>
+                                            <th>Email Notification</th>
+                                            <th>Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="tabularViewModel.kpiSourceData">
+                                        <tr *ngFor="let subscription of tabularViewModel.kpiSourceData">
+                                            <td>{{subscription.moduleName}}</td>
+                                            <td>{{subscription.notificationFor}}</td>
+                                            <td>{{subscription.emailNotification==true?'Yes':'No'}}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="editicon" (click)="editSubscription(subscription.id)"><i class="fa fa-pencil size22 blue"></i></a>
+                                                <a href="javascript:void(0)" class="deleteicon" (click)="removeSubscription(subscription.id)">
+                                                    <i class="fa fa-trash-o size22 blue" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot *ngIf="tabularViewModel.kpiSourceData== null || tabularViewModel.kpiSourceData.length== 0">
+                                        <tr>
+                                            <td colspan="4">
+                                                <span class="marginL5">
+                                                    No record found
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+</section>
+
+<app-modal [modalclasses]="modalclasses">
+    <div class="app-modal-header">
+        <button type="button" class="close" (click)="onClose(false)">&times;</button>
+        <h4 class="modal-title">{{confirmHeader}}</h4>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <strong>{{confirmDescription}}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-default" (click)="onClose(true)">Ok</button>
+                <button *ngIf="isConfirm" type="button" class="btn btn-default" (click)="onClose(false)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</app-modal>

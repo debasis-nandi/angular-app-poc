@@ -1,0 +1,28 @@
+﻿<p-dataList *ngIf="showContent && IsAdmin" [value]="insights">
+    <ng-template let-obj pTemplate="item">        
+            <div (click)="showMoreContent(obj)">
+                <span>{{obj.insightData.substr(0,150) + '...'}}</span>
+                <span>{{ obj.author }}</span>
+                <p class="paddingTop10 size12 col-md-11 padding0">Type: <strong>{{obj.modifiedDate}} </strong> &nbsp;|&nbsp; Source:<strong><a href="javascript:void(0);"></a></strong></p>
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-12  paddingR0">
+                <div *ngIf="IsAdmin && (userId == obj.updatedBy.toLowerCase())">
+                    <a href="javaScript:void(0)" class="pull-right" (click)="onEditClick(obj)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size24 bgreen"></i></a> <a href="javaScript:void(0)" class="pull-right marginR10" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o size24 bgreen"></i></a>
+                </div>
+            </div>       
+    </ng-template>   
+</p-dataList>
+<div *ngIf="!showContent && IsAdmin">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="{{headerClass}}">Insights<span (click)="onClose()" class="pull-right clickable"><i class="fa fa-times"></i></span></div>
+            <div class="{{bodyClass}}" [innerHTML]="contentDefinition.insightData"></div>
+            <div class="{{bodyClass}}">
+                Author: {{contentDefinition.author}} | Last Updated: {{contentDefinition.modifiedDate}}
+                <div *ngIf="IsAdmin && (userId == contentDefinition.updatedBy.toLowerCase())">
+                    <a href="javaScript:void(0)" class="pull-right" (click)="onEditClick(contentDefinition)" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size24 bgreen"></i></a> <a href="javaScript:void(0)" class="pull-right marginR10" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o size24 bgreen"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

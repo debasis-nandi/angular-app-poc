@@ -1,0 +1,47 @@
+﻿
+<my-loader [loading]="loading"></my-loader>
+<section class="paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-9 col-xs-9 padding0">{{title}}</h1>
+                <div id="viewQuery" *ngIf="action == 'view'">
+                    <my-table [tableHeader]="queryData.tableHead"
+                              [tableData]="queryData.kpiData"
+                              [paginator]="paginator"
+                              [pageLinks]="pageLinks"
+                              [rowsPerPage]="rowsPerPage"
+                              [rowsPerPageOptions]="rowsPerPageOptions"
+                              [responsive]="responsive"
+                              [styleClass]="styleClass">
+                    </my-table>
+                </div>
+                <div id="saveQuery" *ngIf="action == 'save'">
+                    <my-admin [otherFormsName]="formName"></my-admin>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--<app-modal [modalclasses]="modalclasses">
+        <div class="app-modal-header">
+            <button type="button" class="close" (click)="onClose()">&times;</button>
+            <h4 class="modal-title blue">{{title}}</h4>
+        </div>
+        <div class="app-modal-body">
+            <div id="viewQuery" *ngIf="action == 'view'">
+                <my-table [tableHeader]="queryData.tableHead"
+                          [tableData]="queryData.kpiData"
+                          [paginator]="paginator"
+                          [pageLinks]="pageLinks"
+                          [rowsPerPage]="rowsPerPage"
+                          [rowsPerPageOptions]="rowsPerPageOptions"
+                          [responsive]="responsive"
+                          [styleClass]="styleClass">
+                </my-table>
+            </div>
+            <div id="saveQuery" *ngIf="action == 'save'">
+                <my-admin [otherFormsName]="formName"></my-admin>
+            </div>
+        </div>
+    </app-modal>-->

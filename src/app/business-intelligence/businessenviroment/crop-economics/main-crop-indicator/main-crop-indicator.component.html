@@ -1,0 +1,105 @@
+﻿
+<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div *ngIf="tabularViewModel">
+    <section class="paddingMob10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-9 col-xs-9 padding0">Global Crop Indicator</h1>
+                    <div class="col-md-3 col-sm-3 col-xs-12 text-right paddingT20 paddingMob0 pull-right">
+                        <!-- hover menu starts -->
+                        <!--<div *ngFor="let action of tabularViewModel.actions">
+                            <my-action *ngIf="(action.actionName|lowercase) ==='filter'" [actionObject]="action" [popover]="pagePopover">
+                            </my-action>
+                            <my-action *ngIf="(action.actionName|lowercase) !=='filter'" [actionObject]="action">
+                            </my-action>
+                        </div>
+                        <popover-content #pagePopover [closeOnClickOutside]="true">
+                            <my-filter *ngIf="tabularViewModel.filters.length > 0"  [filtersList]="tabularViewModel.filters" (selectedValueEmit)='onFilterEmit($event)'> </my-filter>
+                            <button class="btn marginB10" (click)="Submit(pagePopover)">Submit</button>
+                        </popover-content>-->
+
+
+
+
+
+                        <div *ngFor="let action of tabularViewModel.actions">
+                            <div *ngIf="(action.actionName|lowercase) ==='filter'" class="posIcon">
+                                <!--<my-action id="filter" [actionObject]="action" [popover]="pagePopover">-->
+                                <my-action id="filter" [actionObject]="action">
+                                </my-action>
+                                <div class="toggleFilter" style="display: none;">
+                                    <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                        <my-filter [filtersList]="tabularViewModel.filters" (selectedValueEmit)='onFilterEmit($event)'> </my-filter>
+                                        <button id="filterSubmit" class="btn marginB10" (click)="FilterSubmit(pagePopover)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                                <my-action id="export" [actionObject]="action">
+                                </my-action>
+                                <div class="toggleExport" style="display: none;">
+                                    <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                        <my-export *ngIf="tabularViewModel.exports" [exportsList]="tabularViewModel.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                        <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="(action.actionName|lowercase) !=='filter' && (action.actionName|lowercase) !=='export'">
+                                <my-action [actionObject]="action">
+                                </my-action>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section  class="paddingMob10">
+        <div class="container paddingL10R10" id="content">
+            <div class="row border-top5 min200">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="white-boxes padding8LR">
+                        <div class="table-responsive marginT10 unsetScrollX">
+                            <my-table [tableHeader]="tabularViewModel.tableHead"
+                                      [tableData]="tabularViewModel.kpiData"
+                                      [paginator]="paginator"
+                                      [pageLinks]="pageLinks"
+                                      [rowsPerPage]="rowsPerPage"
+                                      [rowsPerPageOptions]="rowsPerPageOptions"
+                                      [responsive]="responsive"
+                                      [hyperLinkUrl]="hyperLinkUrl"
+                                      [styleClass]="styleClass"
+                                      id="tblCropKpi">
+                            </my-table>
+                        </div>
+                        <h3>Sources</h3>
+                        <div class="table-responsive marginT10">
+                            <table class="table table-hover size13 gray">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let obj of tabularViewModel.kpiSourceData; let i = index">
+                                        <td>{{obj.kpiName}}</td>
+                                        <td class="bold">{{obj.sourceName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 paddingT10 text-right"><a [routerLink]="['/layout/kmsearch',getPageModuleId()]">View Raw Data for Crop Economics</a></div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,180 @@
+﻿<!--<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>-->
+
+<section class="padding0 paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-12 col-xs-12 padding0">Authorise User </h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 padding0">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 padding0">
+                            <div class="blue-boxes innerTop borderT2blue">
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12 padding0 adduser">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="T-ID" class="normal"><strong>T-ID</strong></label><br/>
+                                                <!--<input type="text" id="title" class="form-control" placeholder="Enter T-ID" [(ngModel)]="model.tId">-->
+                                               <p-autoComplete  [disabled]="!isUpdateDisable" [(ngModel)]="model.tId" [suggestions]="filteredTIds" (completeMethod)="filterTIds($event)" [size]="45"
+                                                                [minLength]="1" placeholder="Hint: Type starting characters of T-ID" (onSelect)="ontIdchange($event)">                                                    
+                                                </p-autoComplete>
+                                                <!--<span style="margin-left:50px">T-Id: {{model.tId||'none'}}</span>-->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12" *ngIf="!isUpdateDisable">
+                                            <div class="form-group">
+                                                <label for="role" class="normal"><strong>Role</strong></label>
+                                                <select name="role" class="form-control" [(ngModel)]="model.roleId" (change)="onRoleChange($event.target.value)">
+                                                    <option *ngFor="let m of roleData" value="{{m.roleId}}">{{m.roleName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12" *ngIf="regionVisible">
+                                            <div class="form-group">
+                                                <label for="role" class="normal"><strong>Region</strong></label>
+                                                <select name="role" class="form-control" [(ngModel)]="model.regionId">
+                                                    <option *ngFor="let m of regionData" value="{{m.regionId}}">{{m.regionName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="row paddingT15" *ngIf="!isUpdateDisable">
+                                    <div class="col-md-12 col-xs-12 padding0">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="T-ID" class="normal"><strong>Restricted Group</strong></label><br />
+                                                <p-multiSelect [options]="restrictedGroupList" [(ngModel)]="model.restrictedGroup" [overlayVisible]="true">
+                                                </p-multiSelect>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row paddingT15" *ngIf="!isUpdateDisable">
+                                    <div class="col-md-12 col-xs-12 padding0L8">
+                                        <!--<div class="col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="First Name" class="normal"><strong>First Name:</strong></label>
+                                                <label class="normal">{{model.firstName}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="Last Name" class="normal"><strong>Last Name:</strong></label>
+                                                <label class="normal">{{model.lastName}}</label>
+                                            </div>
+                                        </div>                                           
+                                        <div class="col-md-3 col-sm-3 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label for="Email" class="normal"><strong>Email ID:</strong></label>
+                                                <label class="normal">{{model.emailId}}</label>
+                                            </div>
+                                        </div>-->     
+                                        {{'Name : ' +model.firstName +' '+model.lastName}}
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 padding0L8 marginB10">
+                                            {{'Email Id : ' +model.emailId }}
+                                        </div>
+                                </div>
+
+                                <div class="row" *ngIf="statusDesc && statusDesc != ''">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding0">
+                                        <span [ngClass]="statusClass" class="marginL20">{{statusDesc}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding0L8 marginT10">
+                                        <button class="btn marginB20" (click)="Update()" [disabled]="isUpdateDisable">Update</button>
+                                        <button class="btn marginB20" (click)="Reset()">Reset</button>
+                                        <!--<a href="javascript:void(0)" class="btn marginB10 marginL20" (click)="SaveSubscription(true)"> {{isUpdate?'Update':'Save'}}</a>-->
+                                        <!--<a href="javascript:void(0)" class="btn marginB10 marginL10" (click)="ResetSubscription()"> Cancel</a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 padding0">
+
+
+                        <div class="white-boxes">
+                            <h3>Authorised Users</h3>
+                            <!--<div class="table-responsive" id="manageuser">
+                                <table class="table table-hover comp-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Role</th>
+                                            <th>T-ID</th>
+                                            <th>Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="tabularViewModel.kpiSourceData">
+                                        <tr *ngFor="let obj of tabularViewModel.kpiSourceData">
+                                            <td>{{obj.firstName+' '+obj.lastName}}</td>
+                                            <td>{{obj.role}}</td>
+                                            <td>{{obj.tId}}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="editicon" (click)="editSubscription(obj.id)"><i class="fa fa-pencil size22 blue"></i></a>
+                                                <a href="javascript:void(0)" class="deleteicon" (click)="removeSubscription(obj.id)">
+                                                    <i class="fa fa-trash-o size22 blue" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot *ngIf="tabularViewModel.kpiSourceData== null || tabularViewModel.kpiSourceData.length== 0">
+                                        <tr>
+                                            <td colspan="4">
+                                                <span class="marginL5">
+                                                    No record found
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>-->
+                            <!--<underlying-table [tableHeader]="grid?.tableHeaders"
+                                              [tableData]="grid?.tableRows"
+                                              [paginator]="paginator"
+                                              [pageLinks]="pageLinks"
+                                              [rowsPerPage]="rowsPerPage"
+                                              [rowsPerPageOptions]="rowsPerPageOptions"
+                                              [responsive]="responsive">
+                            </underlying-table>-->
+                           
+                            <p-dataTable [tableStyleClass]="styleClass" [resizableColumns]="true" [value]="gridData" [rows]="5" [paginator]="true" [pageLinks]="3"  [rowsPerPageOptions]="[5,10,20]" [responsive]="true">
+                                <!--<p-dataTable [value]="gridData" [paginator]="true">-->
+                                    <<!--p-header>List of Cars</p-header>-->
+                                    <p-column field="userName" header="User Name" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                                    <p-column field="roleName" header="Role Name" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                                    <p-column field="tId" header="T-ID" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                                    <p-column field="region" header="Region" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                                    <p-column field="groupName" header="Restricted Group" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                            </p-dataTable>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

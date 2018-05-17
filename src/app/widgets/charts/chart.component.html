@@ -1,0 +1,9 @@
+﻿{{errorMessage}}
+<div id="chart-container-{{chartId}}" name="">
+    <fusioncharts [width]="charts?.chartWidth"
+                  [height]="charts?.chartHeight"
+                  [type]="charts?.chartType"
+                  dataFormat="json"
+                  [dataSource]="charts?.chartViewModel">
+    </fusioncharts>
+</div>

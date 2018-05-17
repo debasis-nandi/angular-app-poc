@@ -1,0 +1,29 @@
+﻿<div *ngIf="!tableData" class="graph-boxes floatNone text-center">
+    <span class="no-data"> No record found </span>
+</div>
+
+<div *ngIf="tableData">
+    <p-dataTable *ngIf="tableHeader" [tableStyleClass]="styleClass" [value]="tableData" [paginator]="paginator" [rows]="rowsPerPage" [pageLinks]="pageLinks" [rowsPerPageOptions]="rowsPerPageOptions" [reorderableColumns]="reorderableColumns" [responsive]="responsive" (onSort)="sortColumn($event)" emptyMessage="">
+
+        <p-column *ngFor="let item of tableHeader" [header]="item.headerText" [field]="item.header" [hidden]="item.isHidden" [sortable]="item.isSortable">
+            <template let-row="rowData" let-data="rowData" pTemplate>
+
+                <span *ngIf="!item.isHyperLink && !item.isGrowthIndicator && !isNumber(row[item.header])">
+                    <span *ngIf="item.header == 'createdOn'"> {{row[item.header ] | date : 'mediumDate' | EmptyString : '-'}} </span>
+                    <span *ngIf="item.header != 'createdOn'"> {{row[item.header ] | EmptyString : '-'}} </span>
+                </span>
+                <span *ngIf="!item.isHyperLink && !item.isGrowthIndicator && isNumber(row[item.header])">{{row[item.header]  | number:'.0' | EmptyString : '-'}}</span>
+                <span *ngIf="item.isHyperLink">
+                    <a [routerLink]="hyperLinkUrl" (click)="onRedirect(row)">{{row[item.header]}} <span *ngIf="row['year']" class="size12">({{row['year']}})</span> </a>
+                </span>
+                <span *ngIf="item.isGrowthIndicator">{{getColData(row[item.header])  | number:'.0' | EmptyString : '-'}}
+                    <i [ngClass]="{'fa fa-arrow-circle-down': getGrowthIndicator(row[item.header]) == 0}"></i>
+                    <i [ngClass]="{'fa fa-arrow-circle-up': getGrowthIndicator(row[item.header]) == 1}"></i>
+                    <i [ngClass]="{'fa fa-arrow-circle-right': getGrowthIndicator(row[item.header]) == null}"></i>
+                    <span class="dataTableUnitStyle" *ngIf="getColData(row[item.header])">{{getUnitGrowthIndicator(row[item.header])}}</span>
+                </span>
+            </template>
+        </p-column>
+
+    </p-dataTable>
+</div>

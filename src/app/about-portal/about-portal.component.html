@@ -1,0 +1,66 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div *ngIf="glossaryData">
+    <section id="banner-about" class="animated fadeInDown HomeTop">
+        &nbsp;
+    </section>
+    <section class="marginB30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-11 col-xs-12 padding0">About AgriInsider</h1>
+                </div>
+            </div>
+            <div class="row whitebg">
+                <div class="col-md-12 col-xs-12 col-sm-12 paddingT20">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 padding0">
+                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="form-group">
+                                    <div *ngIf="editIndex==-1">
+                                        <ng-container *ngIf="isAdmin">
+                                            
+                                                <a href="javaScript:void(0)" (click)="onSelect()" class="pull-right" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-pencil-square-o size24 bgreen"></i>
+                                                </a>
+                                            
+                                        </ng-container>
+                                        <div [innerHtml]="glossaryData.definition| SafeHtmls">
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="editIndex==1">
+                                        <div id="aboutDefinition" (click)="settingTinymce()" class="aboutportaldescription size14" [innerHtml]="glossaryData?.definition">
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="editIndex==1" class="row">
+                        <div class="col-md-9 col-sm-9 col-xs-12 ">
+                            <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                <a href="javascript:void(0)" class="btn marginB10 " id="update_btn" (click)="onUpdate(glossaryData)"> Update</a>
+                                <a href="javascript:void(0)" class="btn marginB10 " id="cancel_btn" (click)="onCancel()"> Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<ng-container *ngIf="editIndex==-1">
+                        <ng-container *ngIf="isAdmin">
+                            <a href="javaScript:void(0)" (click)="onSelect()" class="pull-right paddingL10" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size24 bgreen"></i></a>
+                        </ng-container>
+                        <div [innerHtml]="glossaryData.definition| SafeHtmls">
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="editIndex==1">
+
+                        <my-glossary [isAdd]="false"  [isGlossary]="false" [editData]="glossaryData" (updateCancelEvent)="onCancel()" (updateddata)="onUpdate($event)"></my-glossary>
+
+                    </ng-container>-->
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+<div class="clearfix"></div>

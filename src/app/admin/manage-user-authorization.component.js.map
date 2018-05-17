@@ -1,0 +1,1 @@
+{"version":3,"file":"manage-user-authorization.component.js","sourceRoot":"","sources":["manage-user-authorization.component.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,qBAAoD,eAAe,CAAC,CAAA;AAQpE;IAAA;IAEA,CAAC;IAPD;QAAC,gBAAS,CAAC;YACP,QAAQ,EAAE,MAAM,CAAC,EAAE;YACnB,QAAQ,EAAE,aAAa;YACvB,WAAW,EAAE,0CAA0C;SAC1D,CAAC;;wCAAA;IAGF,uCAAC;AAAD,CAAC,AAFD,IAEC;AAFY,wCAAgC,mCAE5C,CAAA"}

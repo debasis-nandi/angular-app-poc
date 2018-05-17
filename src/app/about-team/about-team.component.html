@@ -1,0 +1,116 @@
+﻿<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<div *ngIf="aboutTeamList">
+    <div class="container">
+        <section class="paddingMob10">
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-11 col-xs-10 padding0">About Team</h1>
+                    <div class="inner-tabs">
+                        <ul class="list-inline">
+                            <li class="active"><a href="#0c" data-toggle="tab">Core BI</a></li>
+                            <li>|</li>
+                            <li><a href="#1c" data-toggle="tab">Regional BI</a></li>
+                            <li>|</li>
+                            <li><a href="#2c" data-toggle="tab">SMI</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="paddingMob10 padding0 tab-content">
+            <div class="tab-pane active animated fadeInUp row" id="0c">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="white-boxes gray-border marginMobT40 min200">
+                        <div class="form-group">
+                            <div *ngIf="editIndex==-1">
+                                <ng-container *ngIf="isAdmin">
+                                    <a href="javaScript:void(0)" (click)="onSelect(0)" class="pull-right" data-toggle="tooltip" title="Edit">
+                                        <i class="fa fa-pencil-square-o size24 bgreen"></i>
+                                    </a>
+                                </ng-container>
+                                <div [innerHtml]="aboutTeamList[0]?.teamInfo| SafeHtmls">
+                                </div>
+                            </div>
+                            <ng-container *ngIf="editIndex==1">
+                                <div id="aboutDefinition0" (click)="settingTinymce()" class="aboutportaldescription size14" [innerHtml]="aboutTeamList[0]?.teamInfo">
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="editIndex==1" class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="update_btn" (click)="onUpdate(aboutTeamList[0])"> Update</a>
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="cancel_btn" (click)="onCancel()"> Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane animated fadeInUp row" id="1c">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="white-boxes gray-border marginMobT40 min200">
+                        <div class="form-group">
+                            <div *ngIf="editIndex==-1">
+                                <ng-container *ngIf="isAdmin">
+                                    <a href="javaScript:void(0)" (click)="onSelect(1)" class="pull-right" data-toggle="tooltip" title="Edit">
+                                        <i class="fa fa-pencil-square-o size24 bgreen"></i>
+                                    </a>
+                                </ng-container>
+                                <div [innerHtml]="aboutTeamList[1]?.teamInfo| SafeHtmls">
+                                </div>
+                            </div>
+                            <ng-container *ngIf="editIndex==1">
+                                <div id="aboutDefinition1" (click)="settingTinymce()" class="aboutportaldescription size14" [innerHtml]="aboutTeamList[1]?.teamInfo">
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="editIndex==1" class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="update_btn" (click)="onUpdate(aboutTeamList[1])"> Update</a>
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="cancel_btn" (click)="onCancel()"> Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane animated fadeInUp row" id="2c">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <div class="white-boxes gray-border marginMobT40 min200">
+                        <div class="form-group">
+                            <div *ngIf="editIndex==-1">
+                                <ng-container *ngIf="isAdmin">
+                                    <a href="javaScript:void(0)" (click)="onSelect(2)" class="pull-right" data-toggle="tooltip" title="Edit">
+                                        <i class="fa fa-pencil-square-o size24 bgreen"></i>
+                                    </a>
+                                </ng-container>
+                                <div [innerHtml]="aboutTeamList[2]?.teamInfo| SafeHtmls">
+                                </div>
+                            </div>
+                            <ng-container *ngIf="editIndex==1">
+                                <div id="aboutDefinition2" (click)="settingTinymce()" class="aboutportaldescription size14" [innerHtml]="aboutTeamList[2]?.teamInfo">
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="editIndex==1" class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-12 ">
+                                <div class="col-md-12 col-sm-12 col-xs-12 padding0 marginT20 marginB10">
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="update_btn" (click)="onUpdate(aboutTeamList[2])"> Update</a>
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="cancel_btn" (click)="onCancel()"> Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</div>

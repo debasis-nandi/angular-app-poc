@@ -1,0 +1,132 @@
+﻿
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-8 logomob hidden-xs"><a [routerLink]="onRedirect"> <img [src]="logoPath" class="img-responsive logo animated fadeInLeft"></a> </div>
+            <div class="col-md-4 col-sm-4 col-xs-5 logomob hidden-md hidden-lg hidden-sm"><a href="index.html"> <img [src]="logoMobilePath" class="img-responsive logosmall animated fadeInLeft"></a> </div>
+            <div class="col-md-2 col-sm-2 col-xs-5 logomob hidden-md hidden-lg hidden-sm"><a class="newsAlertIcon" href="#"><i class="fa fa-bell" aria-hidden="true"></i> <span class="alertTxt">12</span> </a> </div>
+            <form class="searchbox hidden-md hidden-sm hidden-lg">
+                <input type="search" placeholder="Search......" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                <input type="submit" class="searchbox-submit" value="GO">
+                <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+            </form>
+            <div class="col-md-1 hidden-xs">&nbsp;</div>
+            <div class="col-md-7 col-sm-8 col-xs-12">
+                <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12 animated fadeInUp hidden-xs paddingR0">
+                    <form role="form" class="paddingT10L20" id="search">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input [(ngModel)]="searchItem" class="form-control material-icons icon-material-search" type="text" name="search" placeholder="Search Keywords..." (keypress)="onKeypress($event)" (change)="onChange($event)" required />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="submit" (click)="onSearch()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--<div class="col-lg-1 col-md-1 col-sm-3 col-xs-12 animated pulse hidden-xs quick-zindex text-right">
+                    </div>-->
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 animated hidden-xs padding0 quick-zindex text-right">
+                    <span class="newsAlertIcon">
+                        <a class="" href="javascript:void(0)" (click)="setNotification()">
+                            <i class="fa fa-bell" id="ic_Notification" aria-hidden="true"></i> <span class="alertTxt" *ngIf="userNotification.totalActiveNotification">{{userNotification.totalActiveNotification}}</span>
+                        </a>
+                        <div *ngIf="isShowNotification">
+                            <ul *ngIf="userNotification.notificationList.length > 0">
+                                <li *ngFor="let item of userNotification.notificationList; let i = index">
+                                    <span [innerHtml]="item.description"></span>
+                                </li>
+                            </ul>
+                            <span *ngIf="userNotification.notificationList.length === 0" class="lgrey">
+                                No new notification
+                            </span>
+                        </div>
+                    </span>
+
+                    <span class="quickLink pull-right marginR30">
+                        Hello, {{username}} <i class="glyphicon glyphicon-chevron-down size12"></i>
+                        <!--<i class="glyphicon glyphicon-cog"></i>-->
+                        <ul>
+                            <li><a href="javascript:void(0)" data-toggle="modal" data-target="#profileModal" (click)="userProfileClick()">My Profile</a></li>
+                            <li><a href="javascript:void(0)" routerLink="/layout/subscription">My Subscription</a></li>
+                            <!--<li><a href="javascript:void(0)" (click)="onClickQuery('view')" routerLink="/layout/query">My Queries</a></li>-->
+                            <li><a href="javascript:void(0)" [routerLink]="['/layout/query','view']">My Queries</a></li>
+                            <li><a href="javascript:void(0)" (click)="onLogout()">Logout</a></li>
+                        </ul>
+
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <my-menu></my-menu>
+    </div>
+</header>
+
+<my-breadcrumb></my-breadcrumb>
+<router-outlet></router-outlet>
+
+
+<!--<div class="container marginB20" *ngIf="ShowFooterNote()">
+    <div class="row size12 padding8LR">
+        <div class="row footer-note"  >
+            <div  class="padding0" [ngClass]="footerTextClasses">
+                <div>
+                    <div class="bold text-uppercase size15 marginB5"><i class="fa fa-sticky-note-o"></i> Note</div>
+                    <div id="richTextInsight" [ngClass]="footerHightToggle"  [innerHTML]="GetFootnote() | SafeHtmls"></div>
+                </div>
+            </div>
+            <div *ngIf="isAdmin" (click)="editFootnote($event)" class="col-md-1 col-sm-2 col-xs-2 paddingT15 text-right">
+                <a href="javascript:void(0)" class=""> <span [ngClass]="editIconClasses" class="fa fa-pencil-square-o size20 lblue "></span></a>
+            </div>
+            <a *ngIf="showFooterExtender" class="footer-note-arrow pull-right white" (click)="onFooterExtenderClick()" ><i class="glyphicon glyphicon-chevron-down" [ngClass]="chevronStatus"></i></a>
+        </div>
+
+    </div>
+</div>-->
+<!--for footer note-->
+<my-footer-note></my-footer-note>
+<!--for footer note-->
+<div class="clearfix"></div>
+
+<footer>
+    <div class="container-fluid">
+        <div class="row size16">
+            <p class="borderTopgreen"></p>
+            <div class="col-md-7 col-sm-6 col-xs-12 marginT15">
+                <p class="size14 lblue-light"><i class="fa fa-paper-plane size24 white paddingR5"></i> WE ARE OPEN TO SUGGESTIONS </p>
+                <p class="size24 paddingB0 ">HAVE AN IDEA?</p>
+                <p class="lblue-light">Share your thoughts at <a href="mailto:GlobalBI.AgriInsider@syngenta.com">GlobalBI.AgriInsider@syngenta.com</a></p>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12 marginT15">
+                <div class="row">                    
+                        <div class="col-md-6 col-sm-6">
+                            <p><a [routerLink]="['/layout/competitorcomparison']" href="javascript:void(0)" class="lite-white"><i class="fa fa-cube lgreen-icon"></i> COMPETITOR COMPARISON</a></p>
+                            <p><a href="javascript:void(0)" [routerLink]="['/layout/cropcomparison']" class="lite-white"><i class="fa fa-pagelines lgreen-icon"></i> CROP COMPARISON</a></p>
+                            <p><a [routerLink]="['/layout/maincropindicator']" href="javascript:void(0)" class="lite-white"><i class="fa fa-envira lgreen-icon"></i> MAIN CROP INDICATOR</a></p>
+                            <p><a href="javascript:void(0)" [routerLink]="['/layout/majoragroandseeds']" class="lite-white"><i class="fa fa-industry lgreen-icon"></i> MAJOR AGRO & SEEDS</a></p>
+                            <p><a [routerLink]="['viewglossary']" href="javascript:void(0)" target="{{viewGlossaryTarget()}}" class="lite-white"><i class="fa fa-list-alt lgreen-icon"></i> GLOSSARY</a></p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 borderL-dotted paddingL40 size15">
+                            <p><a href="javascript:void(0)" [routerLink]="['/layout/query','save']" class="lite-white"><i class="fa fa-commenting lgreen-icon"></i> ASK QUESTIONS</a></p>                            
+                            <p><a href="javascript:void(0)" (click)="GetFAQ()" class="lite-white"><i class="fa fa-question-circle lgreen-icon"></i> FAQs</a></p>
+                            <p><a href="javascript:void(0)" [routerLink]="['/layout/aboutportal']" class="lite-white"><i class="fa fa-info-circle lgreen-icon"></i> ABOUT AGRIINSIDER</a></p>
+                            <p><a href="javascript:void(0)" [routerLink]="['/layout/aboutteam']" class="lite-white"><i class="fa fa-users lgreen-icon"></i> ABOUT TEAM</a></p>
+                            <p><a href="javascript:void(0)" (click)="getGuide()" class="lite-white"><i class="fa fa-book lgreen-icon"></i> QUICK START GUIDE</a></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row borderT2grey marginT20 marginB30">
+            <div class="col-md-12 padding8LR paddingT10">
+                <div class="col-md-6 paddingL0 centermob size14 lgreen"> <span>Powered by Evalueserve</span></div>
+                <div class="col-md-6 text-right size14 centermob lgreen"> © {{currentYear}} Syngenta</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" href="javascript:void(0)" (click)="scrollToTop()" class="btn-primary btn-lg back-to-top btnTop  hidden-xs" role="button" title="" data-toggle="tooltip" data-placement="left" data-original-title="Go to top"><span class="glyphicon glyphicon-menu-up"></span></a>
+<app-user-profile [userProfile]="userProfile" [modalclasses]="userProfileModalClasses"></app-user-profile>
+<!--<my-query [action]="queryAction" [queryData]="queryData" [title]="title" [modalclasses]="userProfileModalClasses"></my-query>-->

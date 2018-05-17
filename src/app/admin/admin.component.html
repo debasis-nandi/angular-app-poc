@@ -1,0 +1,460 @@
+﻿
+<my-loader [loading]="loading"></my-loader>
+<div *ngIf="CurrentForm">
+<section class="paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div *ngIf="formtype=='mapping' || formtype=='master'">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-11 col-xs-12 padding0">Metadata Management</h1>
+                    <div class="inner-tabs ">
+                        <ul class="list-inline">
+                            <li><a [routerLink]="['/layout/metadatamanagement']" routerLinkActive="active">Master Data</a></li>
+                            <li>|</li>
+                            <li><a [routerLink]="['/layout/metadatamapping']" routerLinkActive="active">Mapping</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="formtype=='manageuser' || formtype=='adduser'">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-11 col-xs-12 padding0">Manage User Authorization</h1>
+                    <div class="inner-tabs ">
+                        <ul class="list-inline">
+                            <li><a [routerLink]="['/layout/manageuserauthentication']" routerLinkActive="active">Manage User Authorization</a></li>
+                            <li>|</li>
+                            <li><a [routerLink]="['/layout/addnewuser']" routerLinkActive="active">Add User</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!--<p-growl life="5000" [(value)]="msgs"></p-growl>-->
+<!--<section id="content" class="paddingMob10">-->
+<div class='container'>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 padding8LR">
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding0">
+                    <h2 class="marginL20 marginT0 marginB0 blueshade">{{pagetitle}}</h2>
+
+                    <div *ngIf="formtype!='manageuser'">
+                        <div class="blue-boxes animated fadeInDown innerTop">
+
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12 padding0 adduser">
+                                    <form #form='ngForm' novalidate (submit)="SubmitForm(form)" (reset)="ResetForm(form)">
+
+                                        <div *ngFor="let property of parameter; let index=index;">
+                                            <div [ngSwitch]="CurrentForm.masterFormMapping[index].controlName|lowercase">
+
+                                                <div *ngSwitchCase="'textbox'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group' [class.has-error]="para.invalid && ((!para.touched && CurrentForm.masterFormMapping[index].defaultSelected) || (para.touched))">
+                                                                <label class="dgrey" for="{{CurrentForm.masterFormMapping[index].inputField}}">
+                                                                    <span *ngIf="otherFormsName != 'Query'">{{CurrentForm.masterFormMapping[index].inputField}}</span>
+                                                                    <span *ngIf="otherFormsName == 'Query'">Question</span>
+                                                                </label><span class="mandatory"> *</span>
+                                                                <input #para="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}" type="text" class="form-control" [pattern]="textBoxValidationPattern" placeholder="{{CurrentForm.masterFormMapping[index].inputField}}" required minlength="{{CurrentForm.masterFormMapping[index].minLength}}" maxlength="{{CurrentForm.masterFormMapping[index].maxLength}}" name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                <div *ngIf="para.invalid && ((!para.touched && CurrentForm.masterFormMapping[index].defaultSelected) || (para.touched))" class="red marginT10">
+                                                                    {{CurrentForm.masterFormMapping[index].validationMessage}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group' [class.has-error]="paranotrequired.invalid && paranotrequired.dirty">
+                                                                <label class="dgrey" for="{{CurrentForm.masterFormMapping[index].inputField}}">{{CurrentForm.masterFormMapping[index].inputField}}</label>
+                                                                <input #paranotrequired="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}" type="text" class="form-control" pattern="[A-Za-z0-9$#@'&:\s]*[A-Za-z0-9$#@'&:][A-Za-z0-9$#@'&:\s]*" placeholder="{{CurrentForm.masterFormMapping[index].inputField}}" minlength="{{CurrentForm.masterFormMapping[index].minLength}}" name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <div *ngSwitchCase="'textarea'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group' [class.has-error]="para.invalid && ((!para.touched && CurrentForm.masterFormMapping[index].defaultSelected) || (para.touched))">
+                                                                <label class="dgrey" for="{{CurrentForm.masterFormMapping[index].inputField}}">
+                                                                    <span *ngIf="this.otherFormsName != 'Query'">{{CurrentForm.masterFormMapping[index].inputField}}</span>
+                                                                    <span *ngIf="this.otherFormsName == 'Query'">Share Details</span>
+                                                                </label><span class="mandatory"> *</span>
+                                                                <textarea #para="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}" class="form-control"  placeholder="{{CurrentForm.masterFormMapping[index].inputField}}" required minlength="{{CurrentForm.masterFormMapping[index].minLength}}" maxlength="{{CurrentForm.masterFormMapping[index].maxLength}}"  name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected"></textarea>
+                                                                <div *ngIf="para.invalid && ((!para.touched && CurrentForm.masterFormMapping[index].defaultSelected) || (para.touched))" class="red marginT10">
+                                                                    {{CurrentForm.masterFormMapping[index].validationMessage}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group' [class.has-error]="paranotrequired.invalid && paranotrequired.dirty">
+                                                                <label class="dgrey" for="{{CurrentForm.masterFormMapping[index].inputField}}">{{CurrentForm.masterFormMapping[index].inputField}}</label>
+                                                                <textarea #paranotrequired="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}"  class="form-control"  placeholder="{{CurrentForm.masterFormMapping[index].inputField}}"  name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected"></textarea>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div *ngSwitchCase="'dropdown'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <label for="Regional" class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}</label><span class="mandatory"> *</span>
+                                                                <select class="form-control Regional" id="{{CurrentForm.masterFormMapping[index].inputField}}" required name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                    <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                            <option value=null disabled>Select</option>
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value={{key}}>{{d.data[key][0]}}</option>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!--</div>-->
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <label for="Regional" class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}</label>
+                                                                <select class="form-control Regional" id="{{CurrentForm.masterFormMapping[index].inputField}}" name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                    <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                            <option value=null disabled>Select</option>
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value={{key}}>{{d.data[key][0]}}</option>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div *ngSwitchCase="'radiobutton'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <!--<label for="Regional" class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}*</label>-->
+                                                                <label class="dgrey marginR25" *ngIf="this.otherFormsName == 'Query'"> Is this : </label>
+                                                                    <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                            
+                                                                                <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                    <label class="normal marginR25">
+                                                                                        <input type="radio" name="{{d.data[key][0]}}" value="{{key}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                                        {{d.data[key][0]}}
+                                                                                    </label>
+                                                                                </ng-container>
+                                                                            
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <label for="Regional" class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}</label>
+                                                                <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                    <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                        <div class="row">
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <label class="normal marginR25">
+                                                                                    <input type="radio" name="{{d.data[key][0]}}" value="{{key}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                                    {{d.data[key][0]}}
+                                                                                </label>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </ng-container>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div *ngSwitchCase="'multiselect'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <label class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}</label><span class="mandatory"> *</span>
+                                                                <select multiple class="form-control" id="{{CurrentForm.masterFormMapping[index].inputField}}" required name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].multiSelected">
+                                                                    <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value={{key}}>{{d.data[key][0]}}</option>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group'>
+                                                                <label class="dgrey">{{CurrentForm.masterFormMapping[index].inputField}}</label>
+                                                                <select multiple class="form-control" id="{{CurrentForm.masterFormMapping[index].inputField}}" name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].multiSelected">
+                                                                    <ng-container *ngFor="let d of dropdowndata; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==CurrentForm.masterFormMapping[index].formFieldId">
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value={{key}}>{{d.data[key][0]}}</option>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div *ngSwitchCase="'checkbox'">
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired==true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group marginT35' [class.has-error]="CurrentForm.masterFormMapping[index].defaultSelected!=true">
+                                                                <div class="checkbox">
+                                                                <label class="dgrey" for="{{CurrentForm.masterFormMapping[index].inputField}}">
+                                                                    <input #checkrequired="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}" type="checkbox" required name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected"> <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> {{CurrentForm.masterFormMapping[index].inputField}}<span class="mandatory"> *</span>
+                                                                </label>
+                                                                <div *ngIf="CurrentForm.masterFormMapping[index].defaultSelected!=true" class="red marginT10">
+                                                                    {{CurrentForm.masterFormMapping[index].validationMessage}}
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="CurrentForm.masterFormMapping[index].isRequired!=true">
+                                                        <div class="{{displayclass}}">
+                                                            <div class='form-group marginT35'>
+                                                                <div class="checkbox">
+                                                                    <label class="control-label" for="{{CurrentForm.masterFormMapping[index].inputField}}">
+                                                                        <input #checkrequired="ngModel" id="{{CurrentForm.masterFormMapping[index].inputField}}" type="checkbox" name="{{CurrentForm.masterFormMapping[index].inputField}}" [(ngModel)]="CurrentForm.masterFormMapping[index].defaultSelected">
+                                                                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span> {{CurrentForm.masterFormMapping[index].inputField}}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="{{displayclass}}">-->
+                                        <div class="col-md-12 col-sm-12 col-xs-12 ">
+
+                                            <button class='btn ' type="submit" [disabled]="form.invalid">{{AddButtonText}}</button>
+
+                                            <!--<button class='reset btn ' type="reset">Reset</button>-->                                         
+
+
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="formtype=='manageuser'">
+                        <div class=" blue-boxes animated fadeInDown innerTop borderT2blue">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-7 col-xs-12 padding0">
+                                        <!--<form role="form">-->
+                                        <div id="custom-search-input">
+                                            <div class="input-group col-md-12">
+                                                <input type="text" [(ngModel)]='listFilter' name="search" class="form-control" placeholder="Search name..." required="required" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn searchuser" (click)="filter()"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!--</form>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<h4>{{CurrentForm|json}}</h4>-->
+
+
+                    <div class="clearfix"></div>
+                    <div *ngIf="formtype!='other'">
+                       
+                    <div class="white-boxes marginT30 marginMobT30">
+                        <div class="table-responsive marginT15">
+                            <form #editForm='ngForm' novalidate>
+                                <table class="table table-hover comp-table"
+                                       *ngIf='FilteredData && FilteredData.length'>
+                                    <thead>
+                                        <tr>
+                                            <ng-container *ngFor="let property of parameter; let index=index;">
+                                                <th width="30%" *ngIf="(property.controlName|lowercase)!='nocontrol'">{{CurrentForm.masterFormMapping[index].inputField}}</th>
+                                            </ng-container>
+                                            <th width="30%">Edit</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr class="labelRow" *ngFor="let data of FilteredData let i=index;" ng-form name="myForm">
+                                            <ng-container *ngFor="let p of data.masterFormMapping; let index=index;">
+                                                <td width="30%" *ngIf="(p.controlName|lowercase)!='nocontrol'">
+                                                    <ng-container *ngIf="editIndex!=i">
+                                                        <ng-container *ngIf="(p.controlName|lowercase)!='checkbox'">
+                                                            {{p.defaultShowSelected}}
+                                                        </ng-container>
+                                                        <ng-container *ngIf="(p.controlName|lowercase)=='checkbox'">
+                                                            <ng-container *ngIf="p.defaultShowSelected==true">
+                                                                {{"Yes"}}
+                                                            </ng-container>
+                                                            <ng-container *ngIf="p.defaultShowSelected!=true">
+                                                                {{"No"}}
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="editIndex==i">
+                                                        <ng-container [ngSwitch]="p.controlName|lowercase">
+                                                            <ng-container *ngSwitchCase="'textbox'">
+                                                                <ng-container *ngIf="p.isRequired==true">
+                                                                    <span [class.has-error]="para.invalid">
+                                                                        <input #para="ngModel" id="{{p.inputField}}" type="text" class="form-control" [pattern]="textBoxValidationPattern" placeholder="{{p.inputField}}" required minlength="{{p.minLength}}" maxlength="{{p.maxLength}}"  name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                        <span *ngIf="para.invalid" class='red marginT10' style="color:red;">
+                                                                            {{p.validationMessage}}
+                                                                        </span>
+                                                                    </span>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="p.isRequired!=true">
+                                                                    <input #paranotrequired="ngModel" id="{{p.inputField}}" type="text" class="form-control" [pattern]="textBoxValidationPattern" placeholder="{{p.inputField}}" name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                </ng-container>
+                                                            </ng-container>
+                                                            <ng-container *ngSwitchCase="'checkbox'">
+                                                                <ng-container *ngIf="p.isRequired==true">
+                                                                    <div class="checkbox">
+                                                                    <span [class.has-error]="p.defaultSelected!=true">
+                                                                        <label>
+                                                                            <input #checkrequired="ngModel" id="{{p.inputField}}" type="checkbox" required name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                                        </label>
+                                                                             <span *ngIf='p.defaultSelected==false' class="red marginT10" style="color:red;">
+                                                                                {{p.validationMessage}}
+                                                                            </span>
+                                                                        
+                                                                    </span>
+                                                                    </div>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="p.isRequired!=true">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input #checknotrequired="ngModel" id="{{p.inputField}}" type="checkbox" name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                                        </label>
+                                                                    </div>
+                                                               </ng-container>
+                                                            </ng-container>
+                                                            <ng-container *ngSwitchCase="'dropdown'">
+                                                                <select class="form-control" id="{{p.inputField}}" name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                    <ng-container *ngFor="let d of data.dropDownData; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==p.formFieldId">
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value="{{d.data[key][0]}}">{{d.data[key][0]}}</option>
+                                                                            </ng-container>             
+                                                                        </ng-container>
+                                                                    </ng-container>
+
+
+                                                                </select>
+                                                            </ng-container>
+
+                                                            <ng-container *ngSwitchCase="'multiselect'">
+                                                                <select class="form-control" id="{{p.inputField}}" name="{{p.inputField}}" [(ngModel)]="p.defaultSelected">
+                                                                    <ng-container *ngFor="let d of data.dropDownData; let ind=index;">
+                                                                        <ng-container *ngIf="d.dropDownId==p.formFieldId">
+                                                                            <ng-container *ngFor="let key of listkeys(d.data)">
+                                                                                <option value="{{d.data[key][0]}}">{{d.data[key][0]}}</option>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ng-container>
+                                                                </select>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="editIndex!=i"><td><a href="javaScript:void(0)" (click)="onSelect(i)" class="editicon" title="Edit"><i class="fa fa-pencil size22 blue"></i></a> </td></ng-container>
+
+                                            <ng-container *ngIf="editIndex==i" ><td><a href="javaScript:void(0)" [class.disabled]="editForm.invalid" (click)="!editForm.invalid && saveData(data)" class="editicon" title="Save"><i class="fa fa-check size22 dgreen"></i></a></td></ng-container>
+                                           
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                            </form>
+                        </div>
+                        <div class="alignCenter" *ngIf="totalSize > rowPerPage">
+
+                            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a href="javaScript:void(0)" (click)="setPage(1)">First</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a href="javaScript:void(0)" (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                    <a href="javaScript:void(0)" (click)="setPage(page)">{{page}}</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a href="javaScript:void(0)" (click)="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a href="javaScript:void(0)" (click)="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<p-growl *ngIf="otherFormsName != 'Query'" life="5000" [(value)]="msgs"></p-growl>
+<p-growl *ngIf="otherFormsName == 'Query'" id="query-p-growl" life="5000" [(value)]="msgs"></p-growl>    
+       
+</div>

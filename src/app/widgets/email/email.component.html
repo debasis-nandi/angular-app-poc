@@ -1,0 +1,49 @@
+﻿
+<div>
+    <div class="col-md-4 col-sm-4 col-xs-4 padding0">
+            <div id="{{ChartID}}" [style.display]="show ? 'block' : 'none'" class="toggleMe1">
+            <div>
+                <div class="col-md-12 col-sm-12 col-xs-12 padding0 ">
+                    <div class="form-group">
+                        <label for="usr">Email</label>
+                        <input type="email" class="form-control" placeholder="Enter email id" [(ngModel)]="Data.name" required>
+                        <section *ngIf="(errorMsg && index == 1)" class="col-xs-12" id="loginMsg">
+                            <div class="red size12">
+                                <span>{{errorMsg}}</span>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" class="form-control" maxlength="100" placeholder="Enter subject line" [(ngModel)]="Data.subject" required>
+                        <section *ngIf="(errorMsg && index == 2)" class="col-xs-12" id="loginMsg">
+                            <div class="red size12">
+                                <span>{{errorMsg}}</span>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Enter Description</label>
+                        <textarea class="form-control" rows="2" maxlength="200" placeholder="Add description here" [(ngModel)]="Data.description"></textarea>
+                    </div>
+                </div>
+
+                <a href="javaScript:void(0)" class="btn marginB10" (click)="Submit(this)"> Share</a>
+                <section *ngIf="(errorMsg && index == 0)" class="col-xs-12" id="loginMsg">
+                    <div class="red size12">
+                        <span>{{errorMsg}}</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <!-- hover menu ends -->
+    </div>
+</div>
+
+
+
+

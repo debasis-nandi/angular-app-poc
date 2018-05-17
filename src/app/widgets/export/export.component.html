@@ -1,0 +1,78 @@
+﻿<div class="row">
+    <div *ngFor="let filterObject of exportsList">
+
+        <div [ngSwitch]="filterObject.exportType|lowercase">
+
+            <div *ngSwitchCase="'radiobuttonOld'">
+
+                <div #radioOld class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB20">
+                    <div class="dgrey bold marginB5">{{filterObject.exportName}}</div>
+                    <div class="radio radio-info radio-circle">
+                        <div class="col-lg-6 col-sm-6 col-xs-6 padding0" *ngFor="let entry of filterObject.exportData; let i = index">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="exportradiogroup" [value]="entry.labelId" (change)="onChangeRadioButton($event.target.value,filterObject.exportName)" [checked]="entry.labelId==filterObject.selectedData?true:false">
+                                    <span class="cr"><i class="cr-icon fa fa-circle"></i></span>{{ entry.label }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngSwitchCase="'radiobutton'">
+                
+                <div #radioExport *ngIf="showOnChange" class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB20">
+                    <div class="dgrey bold marginB5">{{filterObject.exportName}}</div>
+                    <div class="radio radio-info radio-circle">
+                        <div class="col-lg-6 col-sm-6 col-xs-6 padding0" *ngFor="let entry of filterObject.exportData; let i = index">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="exportradiogroup" [value]="entry.labelId" [(ngModel)]="radioValue" (change)="onChangeRadioButton(radioValue,filterObject.exportName)">
+                                    <span class="cr"><i class="cr-icon fa fa-circle"></i></span>{{ entry.label }}
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div *ngSwitchCase="'imageradiobutton'">
+
+                <div #imageradio class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB20">
+                    <div class="dgrey bold marginB5">{{filterObject.exportName}}</div>
+                    <div class="radio radio-info radio-circle">
+                        <div class="radio radio-info radio-circle paddingTop20 paddingLeft5 marginB20" *ngFor="let entry of filterObject.exportData; let i = index">
+                            <div class="col-lg-4 col-sm-4 col-xs-4 padding0">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="imageradiogroup" [value]="entry.labelId" (change)="onChangeImageRadioButton($event.target.value,filterObject.exportName)" [checked]="entry.labelId==filterObject.selectedData?true:false">
+                                        <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
+                                        <i [class]="entry.iconClass"></i>
+                                        <p class="marginL10 paddingT10 size11">{{ entry.label }}</p>
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3 col-xs-3 paddingLeft5 marginB20" *ngSwitchCase="'multiselect'">
+                <div class="dgrey bold marginB5">{{filterObject.exportName}}</div>
+                <p-multiSelect [options]="filterObject.exportData" [(ngModel)]="multiSelectValues" (ngModelChange)="onChangeMultiSelect($event,filterObject.exportName,filterObject.exportData)"
+                               [overlayVisible]="true"></p-multiSelect>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

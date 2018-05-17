@@ -1,0 +1,64 @@
+﻿
+    <section class="paddingMob10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding8LR">
+                    <h1 class="col-md-12 col-xs-12 padding0">Glossary</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="content" class="paddingMob10">
+        <div class="container height540">
+            <div class="row border-top5">
+                <div class="col-md-12 col-xs-12 paddingR0" (window:scroll)="onScroll($event)">
+                    <div class="col-md-11 col-xs-11 padding0">
+                        <div class="glossary marginB20" *ngFor="let alphabet of listkeys(alphabets); let index=index;" >
+                            <ng-container *ngIf="alphabets[alphabet]!=0 && filterdata(alphabet).length>0">
+                                <a name={{alphabet}}></a>
+                                <h2 class="borderB paddingB10">{{alphabet|uppercase}} </h2>
+                                <table class="table table-hover comp-table size12">
+                                  <tbody>
+                                          <tr *ngFor="let p of filterdata(alphabet); let i=index">
+                                              <ng-container *ngIf="editIndex!=getIndex(alphabet,i)">
+                                                  <td>
+                                                      <ng-container *ngIf="isAdmin">
+                                                          <h4>{{p.term}}<a href="javaScript:void(0)" (click)="onSelect(alphabet,i)" class="pull-right" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o size24 bgreen"></i></a> <a href="javaScript:void(0)" (click)="onDelete(p)" class="pull-right marginR10" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o size24 bgreen"></i></a></h4>
+                                                      </ng-container>
+                                                      <ng-container *ngIf="!isAdmin">
+                                                          <h4>{{p.term}}</h4>
+                                                      </ng-container>
+                                                      <div [innerHtml]="p.definition| SafeHtmls">
+                                                      </div>
+                                                  </td>
+                                              </ng-container>
+                                              <ng-container *ngIf="editIndex==getIndex(alphabet,i)">
+                                                  <td>
+                                                      <my-glossary [isAdd]="false" [editData]="p" (updateCancelEvent)="onCancel()" (updateddata)="onUpdate($event)"></my-glossary>
+                                                  </td>
+                                              </ng-container>
+                                          </tr>
+                                      </tbody>
+
+                                </table>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-xs-1 paddingR0">
+                        <div class="glossary-list" [ngClass]="customAffix" data-spy="affix" data-offset-top="205" >
+                            <div *ngFor="let key of listkeys(alphabets); let index=index;">
+                                <ng-container *ngIf="checkkey(key)==true">
+                                    <a href="{{linkclick}}" (focus)="onfocus(key)" (click)="onalphabetclick(key)">{{key|uppercase}}</a>
+                                </ng-container>
+                                <ng-container *ngIf="checkkey(key)!=true">
+                                    {{key|uppercase}}
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>

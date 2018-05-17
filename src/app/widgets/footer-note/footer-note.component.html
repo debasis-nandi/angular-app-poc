@@ -1,0 +1,37 @@
+﻿<div class="container marginB20" *ngIf="ShowFooterNote()">
+    <div class="row size12 padding8LR">
+        <div class="row footer-note">
+            <div class="padding0" [ngClass]="footerTextClasses">
+                <div>
+                    <div class="bold text-uppercase size15 marginB5"><i class="fa fa-sticky-note-o"></i> Note</div>
+                    <!--<div id="richTextInsight" [ngClass]="footerHightToggle" [innerHTML]="GetFootnote() | SafeHtmls"></div>-->
+                    <div id="richTextInsight" tinyMceEditor [mceDefaultContent]="GetFootnote()" [EditorId]="EditorId" [innerHTML]="GetFootnote() | SafeHtmls"
+                         (onEditorContentChange)="EditorContentChangeHandler($event)" (CharLeft)="ChartLeftHandler($event)" [setEditor]="initEditor" [maxAllowedLength]="maxAllowedLength" [ngClass]="footerHightToggle">
+                    </div>
+                    <div *ngIf="initEditor">Characters left: {{charLeft}}</div>
+                </div>
+            </div>
+            <div *ngIf="isAdmin" (click)="editFootnote($event)" class="col-md-1 col-sm-2 col-xs-2 paddingT15 text-right">
+                <a href="javascript:void(0)" class=""> <span [ngClass]="editIconClasses" class="fa fa-pencil-square-o size20 lblue "></span></a>
+            </div>
+            <a *ngIf="showFooterExtender" class="footer-note-arrow pull-right white" (click)="onFooterExtenderClick()"><i class="glyphicon glyphicon-chevron-down" [ngClass]="chevronStatus"></i></a>
+        </div>
+    </div>
+</div>
+<!--<div class="container marginB20" *ngIf="ShowFooterNote()">
+    <div class="row size12 padding8LR">
+        <div class="row footer-note"  >
+            <div  class="padding0" [ngClass]="footerTextClasses">
+                <div>
+                    <div class="bold text-uppercase size15 marginB5"><i class="fa fa-sticky-note-o"></i> Note</div>
+                    <div id="richTextInsight" [ngClass]="footerHightToggle"  [innerHTML]="GetFootnote() | SafeHtmls"></div>
+                </div>
+            </div>
+            <div *ngIf="isAdmin" (click)="editFootnote($event)" class="col-md-1 col-sm-2 col-xs-2 paddingT15 text-right">
+                <a href="javascript:void(0)" class=""> <span [ngClass]="editIconClasses" class="fa fa-pencil-square-o size20 lblue "></span></a>
+            </div>
+            <a *ngIf="showFooterExtender" class="footer-note-arrow pull-right white" (click)="onFooterExtenderClick()" ><i class="glyphicon glyphicon-chevron-down" [ngClass]="chevronStatus"></i></a>
+        </div>
+
+    </div>
+</div>-->

@@ -1,0 +1,21 @@
+﻿<my-loader [loading]="loading"></my-loader>
+<section class="paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-11 col-xs-10 padding0">Knowledge Management</h1>
+                <div class="inner-tabs">
+                    <ul class="list-inline">
+                        <li class="active"><a [routerLink]="['/layout/recentdocs/']">Recent Documents</a></li>
+                        <li>|</li>
+                        <li><a [routerLink]="['/layout/kmsearch/']">Search</a></li>
+                        <li *ngIf="isAdmin">|</li>
+                        <li *ngIf="isAdmin"><a [routerLink]="['/layout/kmupload/']">Upload Documents</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<my-search-template [isKMSearchComponent]="false" [KMRequest]="KMRequest" [showCustomPaging]="true" [searchItems]="searchItems1" [searchResultFor]="''" [pageSize]="pageSize">
+</my-search-template>

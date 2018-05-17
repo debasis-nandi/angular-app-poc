@@ -1,0 +1,150 @@
+﻿<!--<div *ngIf="newsData">-->
+<div>
+    <my-loader [loading]="loading"></my-loader>
+</div>
+<section class="paddingMob10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 padding8LR">
+                <h1 class="col-md-11 col-xs-10 padding0">{{companyName}}</h1>
+                <div class="col-md-1 col-sm-1 col-xs-2 text-right paddingT20 paddingMob0">
+                    <div *ngFor="let action of tabularViewModel.actions">
+                        <div *ngIf="(action.actionName|lowercase) ==='export'" class="posIcon">
+                            <my-action id="export" [actionObject]="action">
+                            </my-action>
+                            <div class="toggleExport" style="display: none;">
+                                <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                    <my-export *ngIf="tabularViewModel.exports" [exportsList]="tabularViewModel.exports" (selectedValueEmit)='onExportEmit($event)' (exportVisible)="onExportVisibleEmit($event)"> </my-export>
+                                    <button id="exportSubmit" class="btn marginB10" (click)="ExportSubmit()" [disabled]="exportVisible">Export</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="(action.actionName|lowercase) !=='export'">
+                            <my-action [actionObject]="action">
+                            </my-action>
+                        </div>
+                    </div>
+                </div>
+                <my-competitormenu></my-competitormenu>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div *ngIf="ciNewsData">
+        <div class="container">
+            <div class="row white-accordin animated fadeInDown">
+                <div class="blue-boxes innerTop borderT2blue">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12 padding0">
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="Publication">From Date<span class="mandatory"> *</span></label>
+                                        <!--<input type="text" placeholder="7/10/2017" class="form-control">-->
+                                        <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                                        [(ngModel)]="fromPublicationDate" required></my-date-picker>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="Publication">To Date<span class="mandatory"> *</span></label>
+                                        <!--<input type="text" placeholder="7/10/2017" class="form-control">-->
+                                        <my-date-picker name="todate" [options]="myDatePickerOptions"
+                                                        [(ngModel)]="topublicationDate" required></my-date-picker>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12 marginT30">
+                                    <a href="javascript:void(0)" class="btn marginB10 " id="save_btn" (click)="onSave()"> Submit</a>
+                                    <!--<a href="javascript:void(0)" class="btn marginB10 marginL10" id="reset_btn" (click)="onReset()"> Reset</a>-->
+                                </div>
+                            </div>
+                            <span class="red marginL20">{{publicationDateeMsg}}</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="graph-boxes floatNone text-center" *ngIf="ciNewsData.length== 0">
+                    <span class="no-data">
+                        No data found
+                    </span>
+                </div>
+                <div *ngIf="ciNewsData.length > 0">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default" *ngFor="let item of ciNewsData[0].listnewstype; let i = index; let isFirst = first" id="panel{{i}}">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" (click)="ngExpands(i,item.newsTypeId)" data-target="#collapseone{{i}}"
+                                           href="#collapseone{{i}}" [ngClass]="(isFirst) ? 'expanded' : 'collapsed'">{{item.newsTypeName}}</a>
+                                    </h4>
+                                </div>
+
+                                <div id="collapseone{{i}}" [ngClass]="(isFirst) ? 'panel-collapse collapse in' : 'panel-collapse collapse'">
+                                    <ng-container *ngIf="filternewsData">
+                                        <div class="panel-body">
+                                            <div class="col-md-12 col-xs-12" *ngFor="let newitem of filternewsData; let n = index">
+                                                <div *ngIf="item.newsTypeId == newitem.typeId" class="row">
+                                                    <div class="col-md-12 col-xs-12 ">
+                                                        <div class="row paddingT20 paddingB10 borderB">
+                                                            <div class="col-md-1 col-sm-1 col-xs-12  paddingR0">
+                                                                <span class="boldfont"> {{ newitem.publishedDate | date:'dd' }}</span>
+                                                                <p class="dateP">{{ newitem.publishedDate | date:'MMM' }} {{ newitem.publishedDate | date:'y' }}</p>
+                                                            </div>
+                                                            <!--<div class="col-md-11 col-sm-11 col-xs-12 padding0">
+                                                                <a id="content{{n}}" href="JavaScript:Void(0)" class="pull-right sharecontent"><i class="fa fa-share-alt size24 bgreen"></i></a>
+                                                                <div class="toggleContentShare" style="display: none;">
+                                                                    <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                                        <my-email [Title]="newitem.title" [Description]="newitem.description" [SubNewsType]="newitem.subNewsType" [SourceUrl]="newitem.sourceLink" [Name]="newitem.sourceName" DataType="News"></my-email>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="blue size15">{{newitem.title}}</span>
+                                                                <p class="col-md-11 padding0 paddingT10">
+                                                                    {{ (newitem.description | slice:0:100) }} <a href="JavaScript:void(0);" (click)="ngExpandText(i,newitem.id,$event)" id="showmorecontent{{i}}{{newitem.id}}"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                                                </p>
+                                                                <p id="contentmore{{i}}{{newitem.id}}" class="col-md-11 padding0 paddingT10 hide">
+                                                                    {{ (newitem.description) }}
+                                                                </p>
+                                                                <p class="paddingTop10 size12 col-md-11 padding0">Type: <strong>{{newitem.subNewsType}} </strong> &nbsp;|&nbsp; Source:<strong><a href="{{newitem.sourceLink}}" target="_blank"> {{newitem.sourceName}}</a></strong> </p>
+                                                            </div>-->
+
+                                                            <div class="col-md-11 col-sm-11 col-xs-12 paddingR0">
+                                                                <div class="pull-right sharecontent">
+                                                                    <a id="content{{n}}" href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Content Sharing" onmouseenter="$(this).tooltip('show')"><i class="fa fa-share-alt"></i></a>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="toggleContentShare" style="display: none;">
+                                                                        <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                                                            <my-email [Title]="newitem.title" [Description]="newitem.description" [SubNewsType]="newitem.subNewsType" [SourceUrl]="newitem.sourceLink" [CompetitorName]="companyName" [Name]="newitem.sourceName" [SharedDate]="newitem.publishedDate" DataType="News"></my-email>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="bold size15">{{newitem.title}}</span>
+                                                                <p class="col-md-11 padding0 paddingT10">
+                                                                    {{ (newitem.description | slice:0:100) }} <a href="JavaScript:void(0);" (click)="ngExpandText(i,newitem.id,$event)" id="showmorecontent{{i}}{{newitem.id}}" class="ellipsisMore">...</a>
+                                                                </p>
+                                                                <p id="contentmore{{i}}{{newitem.id}}" class="col-md-11 padding0 paddingT10 hide">
+                                                                    {{ (newitem.description) }}
+                                                                </p>
+                                                                <p class="paddingTop10 size12 col-md-11 padding0">Type: <strong>{{newitem.subNewsType}} </strong> &nbsp;|&nbsp; Source:<strong><a href="javascript:void(0);"  (click)="OnSourceUrlClick(newitem.sourceLink,newitem.id,$event)"> {{newitem.sourceName}}</a></strong></p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--</div>-->

@@ -1,0 +1,18 @@
+﻿
+.modal-dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    /*min-width:500px;
+      min-height:300px;*/
+}
+ .modal {
+      /*background: rgba(0,0,0,0.6);*/
+      /*background-color: #000;*/
+ }
+.modal-body {
+    /*height: 250px; overflow-y: scroll;*/
+}

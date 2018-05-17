@@ -1,0 +1,45 @@
+﻿
+<section id="content" class="paddingMob10">
+    <div class="container">
+        <div class="row" *ngIf="searchItems">
+            <div *ngIf="searchItems.elasticResponseData.length == 0">
+                <div class="graph-boxes floatNone text-center">
+                    <span class="no-data">No record found</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12 padding8LR searchContainer" *ngIf="searchItems.elasticResponseData.length > 0">
+
+                <div *ngIf="!showCustomPaging" [ngClass]="innerTabCssClass">
+                    <div class="scroller scroller-left" *ngIf="showLeft" (click)="onLeftScrollClick()"><i class="glyphicon glyphicon-chevron-left"></i></div>
+                    <div class="scroller scroller-right" *ngIf="showRight" (click)="onRightScrollClick()"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    <div class="wrapper" id="twrapper">
+                        <ul class="list-inline list-inline-new list" id="myTab">
+                            <li *ngFor="let item of searchItems.elasticResponseData; let i = index">
+                                <a href="javascript:void(0)" [ngClass]="{'active': selectedItem == i}" (click)="getSearchItems(item.templateType, i)">{{item.typeName}}</a>
+                                <span *ngIf="i != searchItems.elasticResponseData.length-1"> | </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--<div [ngClass]="innerTabCssClass">
+                    <div class="wrapper">
+                        <ul class="list-inline list-inline-new list">
+                            <li *ngFor="let item of searchItems.elasticResponseData; let i = index">
+                                <a href="javascript:void(0)" [ngClass]="{'active': selectedItem == i}" (click)="getSearchItems(item.templateType, i)">{{item.typeName}}</a>
+                                <span *ngIf="i != searchItems.elasticResponseData.length-1"> | </span>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>-->
+                <!--<ng-template #templateContainer>
+                </ng-template>-->
+                <my-news-km-template *ngIf="isNewsKm" [isKMSearchComponent]="isKMSearchComponent" [showCustomPaging]="showCustomPaging" [KMRequest]="KMRequest" [newsKmItems]="items" [searchResultFor]="searchResultFor" [totalSize]="totalSize" [type]="type" [typeName]="typeName">
+                </my-news-km-template>
+                <my-chart-template *ngIf="isChart" [chartItems]="items" [searchResultFor]="searchResultFor" [totalSize]="totalSize" [type]="type">
+                </my-chart-template>
+            </div>
+        </div>
+    </div>
+</section>
+
+

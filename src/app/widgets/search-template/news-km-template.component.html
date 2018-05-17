@@ -1,0 +1,108 @@
+﻿
+<div class="row">
+    <div class="col-md-12 col-xs-12 padding0">
+
+        <div class="graph-boxes floatNone text-center" *ngIf="newsKmItems.length == 0">
+            <span class="no-data">No record found</span>
+        </div>
+
+        <div class="white-boxes marginMobT40 min400" *ngIf="newsKmItems.length > 0">
+            <p class="marginB0 paddingT10 paddingB10 borderB">Displaying results {{pager.startIndex + 1}}-{{pager.endIndex + 1}} out of {{pager.totalItems}} <a *ngIf="!isKMSearchComponent && typeName=='Knowledge Management'" href="javascript:void(0)" [routerLink]="['/layout/kmadvancedsearch',searchResultFor]" class="pull-right blue advance-mob">Advanced Search</a></p>
+            
+            <div *ngFor="let item of pagedItems; let i = index" class="row paddingT20 paddingB10 borderB">
+                <div class="col-md-1 col-sm-1 col-xs-12 paddingR0"> <span class="boldfont"> {{getDay(item.PublicationDate)}}</span><p class="dateP">{{getMonthYear(item.PublicationDate)}}</p></div>
+
+                <div class="col-md-11 col-sm-11 col-xs-12 paddingR0">
+                    <div *ngIf="isAdmin && item.DocType" class="pull-right">
+                        <a href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Edit Document" (click)="onEditDocument(item.Id)" onmouseenter="$(this).tooltip('show')"><i class="fa fa-pencil"></i></a>
+                        <a href="javascript:void(0)" class="widget_big" data-toggle="tooltip" title="Delete Document" (click)="onDeleteDocument(item.Id)" onmouseenter="$(this).tooltip('show')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="pull-right sharecontent">
+                        <a id="content{{i}}" href="javaScript:void(0)" class="widget_big" data-toggle="tooltip" title="Content Sharing" onmouseenter="$(this).tooltip('show')"><i class="fa fa-share-alt"></i></a>
+                    </div>
+                    <div *ngIf="!item.DocType">
+                        <div class="toggleContentShare" style="display: none;">
+                            <div class="filterBox filterBoxBig animated fadeInDown text-left">                                
+                                <my-email [Title]="item.Title" [Description]="item.Description" [SubNewsType]="item.SubType" [CompetitorName]="item.CompetitorName" [SourceUrl]="item.SourceLink" [Name]="item.SourceName" [SharedDate]="item.PublicationDate" DataType="News"></my-email>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="item.DocType">
+                        <div class="toggleContentShare" style="display: none;">
+                            <div class="filterBox filterBoxBig animated fadeInDown text-left">
+                                <my-email [Title]="item.Title" [Description]="item.Description" [Name]="item.AttachmentOriginalName" [SourceUrl]="docpath + item.Id" DataType="Document"></my-email>
+                            </div>
+                        </div>
+                    </div>
+                    <span *ngIf="!item.DocType" class="bold size15">{{item.Title}} </span>
+                    <a *ngIf="item.DocType && !isRestricted(item.DocRestrictedGroup)"  href="JavaScript:void(0);" (click)="getDownloadPath(item.AttachmentUniqueName,item.AttachmentOriginalName)" class="blue size15 downloadfile"><i [ngClass]="getDocType(item.AttachmentOriginalName)"></i>{{item.AttachmentOriginalName}} </a>
+                    <a *ngIf="item.DocType && isRestricted(item.DocRestrictedGroup)" href="JavaScript:void(0);" (click)="getDownloadPath(item.AttachmentUniqueName,item.AttachmentOriginalName, item.DocRestrictedGroup)" class="blue size15 downloadfile"><i [ngClass]="getRestrictedDocType(item.AttachmentOriginalName)"></i>{{item.AttachmentOriginalName}} </a>
+
+                    <p *ngIf="item.Description" class="col-md-11 padding0 paddingT10">
+                        <span> {{ (item.Description | slice:0:maxCharLimit) }} </span>
+                        <a href="JavaScript:void(0);" *ngIf="isAriaHidden(item.Description)" (click)="ngExpandText(i,i,$event)" class="ellipsisMore" id="showmorecontent{{i}}{{i}}">...</a>
+                    </p>
+                    <p *ngIf="item.Description" id="contentmore{{i}}{{i}}" class="col-md-11 padding0 paddingT10 hide">
+                        <span> {{ (item.Description) }} </span>
+                    </p>
+                    <p class="paddingTop10 size12 col-md-11 padding0">
+                        <span *ngIf="item.TypeName">Type: <strong>{{item.TypeName}} - {{item.SubType}} </strong> &nbsp;|&nbsp; </span>
+                        <span *ngIf="item.DocType">Title: <strong>{{item.Title}} </strong> &nbsp;|&nbsp; </span>
+                        <span *ngIf="item.DocModules && item.DocModules.length > 0">Module:<strong> {{getArrayData(item.DocModules)}}</strong> &nbsp;|&nbsp; </span>
+                        <span *ngIf="item.DocCompetitors && item.DocCompetitors.length > 0">Competitor:<strong> {{getArrayData(item.DocCompetitors)}}</strong> &nbsp;|&nbsp; </span>
+                        <span *ngIf="item.DocRegions && item.DocRegions.length > 0">Region: <strong>{{getArrayData(item.DocRegions)}}</strong> &nbsp;| &nbsp;</span>
+                        <span *ngIf="item.DocCountries && item.DocCountries.length > 0">Country: <strong>{{getArrayData(item.DocCountries)}}</strong> &nbsp;|&nbsp; </span>
+                        <span *ngIf="item.Uploadby">Uploaded by: <strong>{{item.Uploadby}}</strong></span>
+                        <span *ngIf="item.SourceName">Source: <strong><a href="{{item.SourceLink}}" target="_blank">{{item.SourceName}}</a></strong></span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="alignCenter" *ngIf="totalSize > rowPerPage && !showCustomPaging">
+
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(1, false)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setPage(pager.currentPage - 1, false)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setPage(page, false)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.currentPage + 1, false)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setPage(pager.totalPages, false)">Last</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="alignCenter" *ngIf="totalSize > rowPerPage && showCustomPaging">
+
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setCustomPage(1, false)">First</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a (click)="setCustomPage(pager.currentPage - 1, false)">Previous</a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a (click)="setCustomPage(page, false)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setCustomPage(pager.currentPage + 1, false)">Next</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a (click)="setCustomPage(pager.totalPages, false)">Last</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
